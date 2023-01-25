@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="?android:actionBarSize">
+
+        <ImageView
+            android:id="@+id/toolbar_iv_menu"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/_6ssp"
+            android:background="@drawable/ic_menu_icon"
+            android:scaleX="1.4"
+            android:scaleY="1.4"
+            android:visibility="gone" />
+
+        <TextView
+            android:id="@+id/tool_name"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginHorizontal="@dimen/_8ssp"
+            android:layout_toEndOf="@id/toolbar_iv_menu"
+            android:ellipsize="end"
+            android:textColor="@color/al_white"
+            app:fonts='@{"bold"}'
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/toolbar_iv_menu"
+            app:layout_constraintTop_toTopOf="parent"
+            app:textSize='@{"font_title_size"}' />
+
+        <pl.droidsonroids.gif.GifImageView
+            android:layout_width="140dp"
+            android:layout_height="match_parent"
+            android:layout_alignParentStart="true"
+            android:scaleType="centerCrop"
+            android:src="@drawable/edikro_img" />
+
+        <TextView
+            android:id="@+id/txt_edit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="@dimen/_4ssp"
+            android:background="@drawable/btn_rounded"
+            android:paddingHorizontal="@dimen/_10ssp"
+            android:paddingVertical="@dimen/_5ssp"
+            android:text="@string/edit"
+            android:textColor="@color/al_white"
+            android:visibility="gone"
+            app:fonts='@{"medium"}'
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:textSize='@{"font_body_s_size"}' />
+
+
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/ll_option"
+            android:layout_alignParentEnd="true">
+
+
+            <ImageView
+                android:id="@+id/toolbar_iv_language"
+                android:layout_width="?actionBarSize"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_toStartOf="@id/txt_edit"
+                android:scaleX="0.6"
+                android:scaleY="0.6"
+                android:src="@drawable/ic_langauge"
+
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/txt_edit"
+                app:layout_constraintTop_toTopOf="parent"
+                app:tint="@color/primary_color" />
+
+            <ImageView
+                android:id="@+id/toolbar_iv_search"
+                android:layout_width="?actionBarSize"
+                android:layout_height="match_parent"
+                android:layout_alignParentEnd="true"
+                android:layout_toStartOf="@id/txt_edit"
+                android:scaleX="0.6"
+                android:scaleY="0.6"
+                android:src="@drawable/ic_baseline_search_24"
+
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/txt_edit"
+                app:layout_constraintTop_toTopOf="parent"
+                app:tint="@color/primary_color" />
+        </androidx.appcompat.widget.LinearLayoutCompat>
+
+
+    </RelativeLayout>
+
+</layout>

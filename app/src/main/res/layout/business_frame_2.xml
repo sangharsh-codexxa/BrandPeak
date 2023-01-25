@@ -1,0 +1,213 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:tools="http://schemas.android.com/tools"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+<RelativeLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="420dp"
+        android:layout_height="370dp"
+        >
+
+        <ImageView
+            android:id="@+id/imageView2"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.044"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.05">
+
+        </ImageView>
+
+        <FrameLayout
+            android:id="@+id/fl_logo"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:layout_gravity="bottom"
+            android:layout_marginBottom="@dimen/_30ssp"
+            android:visibility="visible"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent">
+
+
+
+
+                <ImageView
+                    android:id="@+id/iv_logo"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:scaleType="centerCrop" />
+        </FrameLayout>
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/bg"
+            android:layout_width="wrap_content"
+            android:layout_height="93dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.992">
+
+
+            <TextView
+                android:id="@+id/tv_name"
+                android:layout_width="236dp"
+                android:layout_height="21dp"
+                android:layout_marginBottom="56dp"
+
+                android:text="CODEXXA BUSSINESS SOLUTION"
+                android:textAlignment="center"
+                android:textColor="#ffffff"
+                android:textSize="12sp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.314"
+                app:layout_constraintStart_toStartOf="parent" />
+
+            <LinearLayout
+
+                android:layout_width="325dp"
+                android:layout_height="52dp"
+                android:orientation="vertical"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.716"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.933">
+
+                <LinearLayout
+                    android:layout_width="316dp"
+                    android:layout_height="wrap_content"
+                    tools:ignore="MissingConstraints">
+                    <ImageView
+                        android:id="@+id/iv_address_close"
+                        android:layout_width="@dimen/_5ssp"
+                        android:layout_height="@dimen/_5ssp"
+                        android:layout_gravity="top|left|center_vertical|center_horizontal|center|start"
+                        android:elevation="1dp"
+                        android:src="@drawable/ic_remove"
+                        android:visibility="gone" />
+                    <TextView
+                        android:id="@+id/tv_email"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerInParent="true"
+                        android:gravity="start"
+                        android:paddingLeft="39dp"
+                        android:paddingRight="3dp"
+                        android:singleLine="true"
+                        android:text=" Aaysha@gmail.com"
+                        android:textColor="#000000"
+                        android:textSize="11dp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/tv_phone"
+                        android:layout_width="144dp"
+                        android:layout_height="wrap_content"
+                        android:layout_centerInParent="true"
+
+                        android:gravity="start"
+                        android:paddingLeft="4dp"
+                        android:paddingRight="46dp"
+                        android:singleLine="true"
+                        android:text="98764534567"
+                        android:textColor="#000000"
+                        android:textSize="11dp"
+                        android:textStyle="bold" />
+
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/tv_address"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:gravity="center"
+                    android:paddingLeft="39dp"
+                    android:paddingTop="3dp"
+                    android:paddingRight="40dp"
+
+                    android:singleLine="true"
+                    android:text="Hinjewadi Rajiv Gandhi Infotech Park, Hinjawadi, Pune"
+                    android:textColor="#000000"
+                    android:textSize="10dp"
+                    android:textStyle="bold" />
+
+                <LinearLayout
+                    android:id="@+id/linearLayout"
+                    android:layout_width="wrap_content"
+                    android:layout_height="24dp"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginBottom="16dp"
+                    android:orientation="horizontal"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent">
+
+                    <ImageView
+                        android:layout_width="10dp"
+                        android:layout_height="match_parent" />
+
+                    <TextView
+                        android:layout_width="20dp"
+                        android:layout_height="10dp"
+                        android:layout_gravity="center"
+                        android:gravity="center"
+                        android:text="Insta"
+                        android:textColor="@color/white"
+                        android:textSize="8sp"
+                        android:textStyle="bold" />
+
+                    <ImageView
+                        android:layout_width="10dp"
+                        android:layout_height="match_parent"
+                        android:src="@drawable/facebook" />
+
+                    <TextView
+                        android:layout_width="20dp"
+                        android:layout_height="10dp"
+                        android:layout_gravity="center"
+                        android:gravity="center"
+                        android:text="facebook"
+                        android:textColor="@color/white"
+                        android:textSize="8sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:layout_gravity="center_vertical"
+                        android:id="@+id/tv_website"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:ellipsize="end"
+                        android:layout_marginStart="@dimen/_2ssp"
+                        android:gravity="center"
+                        android:maxLines="1"
+                        android:text="www..com"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/_7ssp" />
+                </LinearLayout>
+
+
+            </LinearLayout>
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+</RelativeLayout>
+</layout>
+
+
+

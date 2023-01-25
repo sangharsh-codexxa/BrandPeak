@@ -1,0 +1,269 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/tools"
+    xmlns:sweet="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:layout_gravity="center"
+            android:layout_margin="10dp"
+            sweet:cardCornerRadius="@dimen/_90ssp">
+
+            <ImageView
+                android:id="@+id/user_profile"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+
+                android:src="@drawable/ic_profile" />
+        </androidx.cardview.widget.CardView>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_marginStart="2dp"
+            android:layout_marginTop="5dp"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <EditText
+                android:id="@+id/ed_first_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginEnd="20dp"
+                android:background="@null"
+                android:clickable="false"
+                android:enabled="false"
+                android:text="Name"
+                android:textColor="@color/black"
+                android:textStyle="bold"
+                sweet:tint="@color/colorPrimary" />
+
+            <EditText
+                android:id="@+id/ed_profile_type"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="20dp"
+                android:background="@null"
+                android:clickable="false"
+                android:drawableTint="@color/black"
+                android:enabled="false"
+                android:textColor="@color/textColor"
+                android:textSize="12sp"
+                sweet:tint="@color/black" />
+        </LinearLayout>
+
+        <ImageButton
+            android:id="@+id/btnEdit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginEnd="20dp"
+            android:background="@null"
+            android:src="@drawable/ic_edit"
+            sweet:tint="@color/black" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/ll_gopro"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="20dp"
+        android:layout_marginVertical="8dp"
+        android:background="@drawable/bg_gopro"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_margin="6dp"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="Remove Watermark"
+            android:textColor="@color/white"
+            android:textSize="18sp" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btn_upgrade"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:backgroundTint="@color/white"
+            android:text="Upgrade"
+            android:textAllCaps="false"
+            android:textColor="@color/light_blue_700"
+            app:icon="@drawable/ic_vector"
+            app:iconSize="16dp"
+            app:iconTint="@color/yellow_800" />
+    </LinearLayout>
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/btn_myPost"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:clickable="true"
+        android:drawableStart="@drawable/ic_arrow_circle"
+        android:drawableEnd="@drawable/ic_chevron"
+        android:drawablePadding="8dp"
+        android:focusable="true"
+
+        android:padding="16dp"
+        android:text="My Post"
+        android:textColor="@color/primary_color"
+        android:textSize="16sp"
+        android:textStyle="bold"
+
+        />
+
+    <com.google.android.material.divider.MaterialDivider
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginVertical="4dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginEnd="20dp" />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/btn_myPlan"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:clickable="true"
+        android:drawableStart="@drawable/ic_local_play"
+        android:drawableEnd="@drawable/ic_chevron"
+        android:drawablePadding="8dp"
+        android:focusable="true"
+        android:padding="16dp"
+        android:text="My Plan"
+        android:textColor="@color/primary_color"
+        android:textSize="16sp"
+        android:textStyle="bold" />
+
+    <com.google.android.material.divider.MaterialDivider
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginVertical="4dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginEnd="20dp" />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/btn_shareApp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:drawableStart="@drawable/ic_share"
+        android:drawableEnd="@drawable/ic_chevron"
+        android:drawablePadding="8dp"
+        android:focusable="true"
+        android:padding="16dp"
+        android:text="Share us"
+        android:textColor="@color/primary_color"
+        android:textSize="16sp"
+        android:textStyle="bold" />
+    <com.google.android.material.divider.MaterialDivider
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginVertical="4dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginEnd="20dp" />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/btn_rateApp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:drawableStart="@drawable/ic_star_rate"
+        android:drawableEnd="@drawable/ic_chevron"
+        android:drawablePadding="8dp"
+        android:focusable="true"
+        android:padding="16dp"
+        android:text="Rate us"
+        android:textColor="@color/primary_color"
+        sweet:backgroundTint="#4100BCD4"
+        android:textSize="16sp"
+        android:textStyle="bold" />
+    <com.google.android.material.divider.MaterialDivider
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginVertical="4dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginEnd="20dp" />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/btn_privacyPolicy"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:drawableStart="@drawable/ic_privacy"
+        android:drawableEnd="@drawable/ic_chevron"
+        android:drawablePadding="8dp"
+        android:focusable="true"
+        android:padding="16dp"
+        android:text="Privacy Policy"
+        android:textColor="@color/primary_color"
+        android:textSize="16sp"
+        android:textStyle="bold" />
+    <com.google.android.material.divider.MaterialDivider
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginVertical="4dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginEnd="20dp" />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/btn_termsConditions"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:drawableStart="@drawable/ic_tc"
+        android:drawableEnd="@drawable/ic_chevron"
+        android:drawablePadding="8dp"
+        android:focusable="true"
+        android:padding="16dp"
+        android:text="Terms &amp; Conditions"
+        android:textColor="@color/primary_color"
+        android:textSize="16sp"
+        android:textStyle="bold" />
+    <com.google.android.material.divider.MaterialDivider
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginVertical="4dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginEnd="20dp" />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/btn_logOut"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:drawableStart="@drawable/ic_logout"
+        android:drawableEnd="@drawable/ic_chevron"
+        android:drawablePadding="8dp"
+        android:focusable="true"
+        android:padding="16dp"
+        android:text="Log Out"
+        android:textColor="@color/primary_color"
+        android:textSize="16sp"
+        android:textStyle="bold" />
+
+    <com.google.android.material.textview.MaterialTextView
+
+        android:layout_width="match_parent"
+        android:layout_height="190dp"
+        />
+
+</LinearLayout>
+
+    </androidx.core.widget.NestedScrollView>
+</LinearLayout>

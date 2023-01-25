@@ -1,0 +1,738 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:aapt="http://schemas.android.com/aapt"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:tag="layout/activity_add_business">
+
+<!--        <include-->
+<!--            android:id="@+id/toolbar"-->
+<!--            layout="@layout/toolbar_layout"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="?attr/actionBarSize"-->
+<!--            app:layout_constraintEnd_toEndOf="parent"-->
+<!--            app:layout_constraintStart_toStartOf="parent"-->
+<!--            app:layout_constraintTop_toTopOf="parent" />-->
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toTopOf="@id/ll_adview"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <androidx.appcompat.widget.LinearLayoutCompat
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_margin="@dimen/_10ssp"
+                android:orientation="vertical">
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="160dp"
+                    android:layout_marginBottom="20dp"
+                    android:src="@drawable/testimg" />
+
+                <androidx.appcompat.widget.LinearLayoutCompat
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <androidx.appcompat.widget.AppCompatButton
+                        android:id="@+id/btn_typeBusiness"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="5dp"
+                        android:layout_marginEnd="@dimen/_5ssp"
+                        android:layout_weight="1"
+                        android:backgroundTint="@color/green"
+                        android:text="Business"
+                        android:textSize="12sp" />
+
+                    <androidx.appcompat.widget.AppCompatButton
+                        android:id="@+id/btn_typePersonal"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/_5ssp"
+                        android:layout_marginEnd="@dimen/_5ssp"
+                        android:layout_weight="1"
+                        android:text="Personal"
+                        android:textSize="12sp" />
+
+                    <androidx.appcompat.widget.AppCompatButton
+                        android:id="@+id/btn_typePolitilcle"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/_5ssp"
+                        android:layout_marginEnd="5dp"
+                        android:layout_weight="1"
+                        android:text="Political"
+                        android:textSize="12sp" />
+                </androidx.appcompat.widget.LinearLayoutCompat>
+
+                <androidx.appcompat.widget.LinearLayoutCompat
+                    android:id="@+id/lvl_business_type"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:visibility="gone">
+
+                    <androidx.appcompat.widget.LinearLayoutCompat
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp"
+                        android:gravity="center"
+                        android:orientation="horizontal">
+
+                        <androidx.appcompat.widget.AppCompatImageView
+                            android:id="@+id/iv_business"
+                            android:layout_width="@dimen/_65ssp"
+                            android:layout_height="@dimen/_65ssp"
+                            android:layout_marginRight="@dimen/_5ssp"
+                            android:src="@drawable/image_placeholder" />
+
+                        <androidx.appcompat.widget.AppCompatButton
+                            android:id="@+id/btnAddImage"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="@dimen/_5ssp"
+                            android:background="@color/transparent_color"
+
+                            android:text="+ Upload your buisness logo"
+                            android:textAllCaps="false"
+                            android:textColor="@color/primary_color" />
+                    </androidx.appcompat.widget.LinearLayoutCompat>
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/textView8"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/_10ssp"
+
+                        android:text="@string/business_name"
+                        android:textColor="@color/black"
+                        android:visibility="gone"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/iv_business" />
+
+                    <androidx.appcompat.widget.AppCompatEditText
+                        android:id="@+id/etBusinessName"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/_3ssp"
+                        android:background="@drawable/white_shape_edit"
+                        android:hint="@string/hint_business_name"
+                        android:inputType="textPersonName"
+                        android:paddingHorizontal="@dimen/_8ssp"
+                        android:paddingVertical="@dimen/_8ssp"
+                        android:paddingLeft="@dimen/_8ssp"
+                        android:paddingTop="@dimen/_8ssp"
+                        android:paddingRight="@dimen/_8ssp"
+                        android:paddingBottom="@dimen/_8ssp" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/textView10"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/_5ssp"
+                        android:text="@string/business_phone_number"
+                        android:textColor="@color/black"
+                        android:visibility="invisible"
+                        app:layout_constraintStart_toStartOf="@id/etBusinessName"
+                        app:layout_constraintTop_toBottomOf="@id/etBusinessName" />
+
+                    <androidx.appcompat.widget.AppCompatEditText
+                        android:id="@+id/etBusinessNumber"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/_3ssp"
+                        android:background="@drawable/white_shape_edit"
+                        android:hint="@string/hint_business_number"
+                        android:inputType="number"
+                        android:paddingHorizontal="@dimen/_8ssp"
+                        android:paddingVertical="@dimen/_8ssp"
+                        android:paddingLeft="@dimen/_8ssp"
+                        android:paddingTop="@dimen/_8ssp"
+                        android:paddingRight="@dimen/_8ssp"
+                        android:paddingBottom="@dimen/_8ssp"
+                        app:layout_constraintEnd_toEndOf="@id/etBusinessName"
+                        app:layout_constraintStart_toStartOf="@id/textView10"
+                        app:layout_constraintTop_toBottomOf="@id/textView10" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/textView11"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/_5ssp"
+                        android:text="@string/business_email"
+                        android:textColor="@color/black"
+                        android:visibility="invisible"
+                        app:layout_constraintStart_toStartOf="@id/etBusinessName"
+                        app:layout_constraintTop_toBottomOf="@id/etBusinessNumber" />
+
+                    <androidx.appcompat.widget.AppCompatEditText
+                        android:id="@+id/etBusinessEmail"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/_3ssp"
+                        android:background="@drawable/white_shape_edit"
+                        android:hint="@string/hint_business_email"
+                        android:inputType="textEmailAddress"
+                        android:paddingHorizontal="@dimen/_8ssp"
+                        android:paddingVertical="@dimen/_8ssp"
+                        android:paddingLeft="@dimen/_8ssp"
+                        android:paddingTop="@dimen/_8ssp"
+                        android:paddingRight="@dimen/_8ssp"
+                        android:paddingBottom="@dimen/_8ssp"  />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/textView12"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/_5ssp"
+                        android:text="@string/business_website"
+                        android:textColor="@color/black"
+                        android:visibility="invisible"
+                        app:layout_constraintStart_toStartOf="@id/etBusinessName"
+                        app:layout_constraintTop_toBottomOf="@id/etBusinessNumber" />
+
+                    <androidx.appcompat.widget.AppCompatEditText
+                        android:id="@+id/etBusinessWebsite"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/_3ssp"
+                        android:background="@drawable/rounded_border"
+                        android:hint="@string/hint_business_website"
+                        android:inputType="textWebEditText"
+                        android:paddingHorizontal="@dimen/_8ssp"
+                        android:paddingVertical="@dimen/_8ssp"
+                        android:paddingLeft="@dimen/_8ssp"
+                        android:paddingTop="@dimen/_8ssp"
+                        android:paddingRight="@dimen/_8ssp"
+                        android:paddingBottom="@dimen/_8ssp" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/_5ssp"
+                        android:text="@string/business_address"
+                        android:textColor="@color/black"
+                        android:visibility="invisible"
+                        app:layout_constraintStart_toStartOf="@id/etBusinessName"
+                        app:layout_constraintTop_toBottomOf="@id/etBusinessNumber" />
+
+                    <androidx.appcompat.widget.AppCompatEditText
+                        android:id="@+id/etBusinessAddress"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/_3ssp"
+                        android:background="@drawable/white_shape_edit"
+                        android:gravity="top"
+                        android:hint="@string/hint_business_address"
+                        android:inputType="textMultiLine"
+                        android:paddingHorizontal="@dimen/_8ssp"
+                        android:paddingVertical="@dimen/_8ssp"
+                        android:paddingLeft="@dimen/_8ssp"
+                        android:paddingTop="@dimen/_8ssp"
+                        android:paddingRight="@dimen/_8ssp"
+                        android:paddingBottom="@dimen/_8ssp"/>
+
+                    <androidx.appcompat.widget.AppCompatButton
+                        android:id="@+id/btn_save"
+                        android:layout_width="150dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+                        android:layout_marginVertical="@dimen/_10ssp"
+                        android:layout_marginTop="@dimen/_10ssp"
+                        android:layout_marginBottom="@dimen/_10ssp"
+                        android:background="@drawable/btn_rounded"
+                        android:backgroundTint="@color/primary_color"
+                        android:text="@string/save"
+
+                        android:textAllCaps="false"
+                        android:textColor="@color/al_white" />
+                </androidx.appcompat.widget.LinearLayoutCompat>
+
+                <androidx.appcompat.widget.LinearLayoutCompat
+                    android:id="@+id/lvl_personal_type"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:visibility="visible">
+
+                    <androidx.appcompat.widget.LinearLayoutCompat
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp"
+                        android:gravity="center"
+                        android:orientation="horizontal">
+
+                        <androidx.appcompat.widget.AppCompatImageView
+                            android:id="@+id/iv_personal"
+                            android:layout_width="@dimen/_65ssp"
+                            android:layout_height="@dimen/_65ssp"
+                            android:layout_marginRight="@dimen/_5ssp"
+                            android:src="@drawable/image_placeholder" />
+
+                        <androidx.appcompat.widget.AppCompatButton
+                            android:id="@+id/btnAddPerImage"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="@dimen/_5ssp"
+                            android:background="@color/transparent_color"
+                            android:text="+ Upload Profile"
+                            android:textAllCaps="false"
+                            android:textColor="@color/primary_color" />
+                    </androidx.appcompat.widget.LinearLayoutCompat>
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/_10ssp"
+                        android:text="@string/business_name"
+                        android:textColor="@color/black"
+                        android:visibility="gone"
+                        app:layout_constraintTop_toBottomOf="@id/iv_business" />
+
+                    <androidx.appcompat.widget.AppCompatEditText
+                        android:id="@+id/etYourName"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/_3ssp"
+                        android:background="@drawable/white_shape_edit"
+                        android:hint="Enter Your Name"
+                        android:inputType="textPersonName"
+                        android:paddingHorizontal="@dimen/_8ssp"
+                        android:paddingVertical="@dimen/_8ssp"
+                        android:paddingLeft="@dimen/_8ssp"
+                        android:paddingTop="@dimen/_8ssp"
+                        android:paddingRight="@dimen/_8ssp"
+                        android:paddingBottom="@dimen/_8ssp" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/_5ssp"
+                        android:text="@string/business_phone_number"
+                        android:textColor="@color/black"
+                        android:visibility="invisible"
+                        app:layout_constraintStart_toStartOf="@id/etBusinessName"
+                        app:layout_constraintTop_toBottomOf="@id/etBusinessName" />
+
+                    <androidx.appcompat.widget.AppCompatEditText
+                        android:id="@+id/etYourNumber"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/_3ssp"
+                        android:background="@drawable/white_shape_edit"
+                        android:hint="Enter Mobile Number"
+                        android:inputType="number"
+                        android:paddingHorizontal="@dimen/_8ssp"
+                        android:paddingVertical="@dimen/_8ssp"
+                        android:paddingLeft="@dimen/_8ssp"
+                        android:paddingTop="@dimen/_8ssp"
+                        android:paddingRight="@dimen/_8ssp"
+                        android:paddingBottom="@dimen/_8ssp"
+                        app:layout_constraintEnd_toEndOf="@id/etBusinessName"
+                        app:layout_constraintStart_toStartOf="@id/textView10"
+                        app:layout_constraintTop_toBottomOf="@id/textView10" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/_5ssp"
+                        android:text="@string/business_email"
+                        android:textColor="@color/black"
+                        android:visibility="invisible"
+                        app:layout_constraintStart_toStartOf="@id/etBusinessName"
+                        app:layout_constraintTop_toBottomOf="@id/etBusinessNumber" />
+
+                    <androidx.appcompat.widget.AppCompatEditText
+                        android:id="@+id/etYourAddress"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/_3ssp"
+                        android:background="@drawable/white_shape_edit"
+                        android:hint="Enter Your Address"
+                        android:inputType="textEmailAddress"
+                        android:paddingHorizontal="@dimen/_8ssp"
+                        android:paddingVertical="@dimen/_8ssp"
+                        android:paddingLeft="@dimen/_8ssp"
+                        android:paddingTop="@dimen/_8ssp"
+                        android:paddingRight="@dimen/_8ssp"
+                        android:paddingBottom="@dimen/_8ssp" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/_5ssp"
+                        android:text="@string/business_website"
+                        android:textColor="@color/black"
+                        android:visibility="invisible"
+                        app:layout_constraintStart_toStartOf="@id/etBusinessName"
+                        app:layout_constraintTop_toBottomOf="@id/etBusinessNumber" />
+
+                    <androidx.appcompat.widget.AppCompatEditText
+                        android:id="@+id/etFacebookUsername"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/_3ssp"
+                        android:background="@drawable/rounded_border"
+                        android:hint="Facebook Username"
+                        android:inputType="textWebEditText"
+                        android:paddingHorizontal="@dimen/_8ssp"
+                        android:paddingVertical="@dimen/_8ssp"
+                        android:paddingLeft="@dimen/_8ssp"
+                        android:paddingTop="@dimen/_8ssp"
+                        android:paddingRight="@dimen/_8ssp"
+                        android:paddingBottom="@dimen/_8ssp" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/textView13"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/_5ssp"
+                        android:text="@string/business_address"
+                        android:textColor="@color/black"
+                        android:visibility="invisible"
+                        app:layout_constraintStart_toStartOf="@id/etBusinessName"
+                        app:layout_constraintTop_toBottomOf="@id/etBusinessNumber" />
+
+                    <androidx.appcompat.widget.AppCompatEditText
+                        android:id="@+id/etInstagramUsername"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/_3ssp"
+                        android:background="@drawable/rounded_border"
+                        android:hint="Instagram Username"
+                        android:inputType="textWebEditText"
+                        android:paddingHorizontal="@dimen/_8ssp"
+                        android:paddingVertical="@dimen/_8ssp"
+                        android:paddingLeft="@dimen/_8ssp"
+                        android:paddingTop="@dimen/_8ssp"
+                        android:paddingRight="@dimen/_8ssp"
+                        android:paddingBottom="@dimen/_8ssp"/>
+
+                    <androidx.appcompat.widget.AppCompatButton
+                        android:id="@+id/btn_save_personal"
+                        android:layout_width="150dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+                        android:layout_marginVertical="@dimen/_10ssp"
+                        android:layout_marginTop="@dimen/_10ssp"
+                        android:layout_marginBottom="@dimen/_10ssp"
+                        android:background="@drawable/btn_rounded"
+                        android:backgroundTint="@color/primary_color"
+                        android:text="@string/save"
+                        android:textAllCaps="false"
+                        android:textColor="@color/al_white" />
+                </androidx.appcompat.widget.LinearLayoutCompat>
+
+                <androidx.appcompat.widget.LinearLayoutCompat
+                    android:id="@+id/lvl_political_type"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:orientation="vertical"
+                    android:visibility="visible">
+
+                    <androidx.appcompat.widget.LinearLayoutCompat
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:orientation="horizontal">
+
+                        <androidx.appcompat.widget.LinearLayoutCompat
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="5dp"
+                            android:gravity="center"
+                            android:orientation="vertical">
+
+                            <androidx.appcompat.widget.AppCompatImageView
+                                android:id="@+id/iv_poli_logo"
+                                android:layout_width="@dimen/_65ssp"
+                                android:layout_height="@dimen/_65ssp"
+                                android:layout_gravity="center"
+                                android:src="@drawable/image_placeholder" />
+
+                            <androidx.appcompat.widget.AppCompatButton
+                                android:id="@+id/btnAddPoliLogo"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="@dimen/_5ssp"
+                                android:background="@color/transparent_color"
+                                android:text="Upload Logo"
+                                android:textAllCaps="false"
+                                android:textColor="@color/primary_color" />
+                        </androidx.appcompat.widget.LinearLayoutCompat>
+
+                        <androidx.appcompat.widget.LinearLayoutCompat
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="5dp"
+                            android:gravity="center"
+                            android:orientation="vertical">
+
+                            <androidx.appcompat.widget.AppCompatImageView
+                                android:id="@+id/iv_poli_profile"
+                                android:layout_width="@dimen/_65ssp"
+                                android:layout_height="@dimen/_65ssp"
+                                android:layout_gravity="center"
+                                android:src="@drawable/image_placeholder" />
+
+                            <androidx.appcompat.widget.AppCompatButton
+                                android:id="@+id/btnAddPoliProfile"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="@dimen/_5ssp"
+                                android:background="@color/transparent_color"
+                                android:text="Upload Profile"
+                                android:textAllCaps="false"
+                                android:textColor="@color/primary_color" />
+                        </androidx.appcompat.widget.LinearLayoutCompat>
+                    </androidx.appcompat.widget.LinearLayoutCompat>
+
+                    <androidx.appcompat.widget.LinearLayoutCompat
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:orientation="horizontal">
+
+                        <androidx.appcompat.widget.LinearLayoutCompat
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="5dp"
+                            android:gravity="center"
+                            android:orientation="vertical">
+
+                            <androidx.appcompat.widget.AppCompatImageView
+                                android:id="@+id/iv_photo1"
+                                android:layout_width="@dimen/_65ssp"
+                                android:layout_height="@dimen/_65ssp"
+                                android:layout_gravity="center"
+                                android:src="@drawable/image_placeholder" />
+
+                            <androidx.appcompat.widget.AppCompatButton
+                                android:id="@+id/btnAddPhoto1"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="@dimen/_5ssp"
+                                android:background="@color/transparent_color"
+                                android:text="Photo 1"
+                                android:textAllCaps="false"
+                                android:textColor="@color/primary_color" />
+                        </androidx.appcompat.widget.LinearLayoutCompat>
+
+                        <androidx.appcompat.widget.LinearLayoutCompat
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="5dp"
+                            android:gravity="center"
+                            android:orientation="vertical">
+
+                            <androidx.appcompat.widget.AppCompatImageView
+                                android:id="@+id/iv_photo2"
+                                android:layout_width="@dimen/_65ssp"
+                                android:layout_height="@dimen/_65ssp"
+                                android:layout_gravity="center"
+                                android:src="@drawable/image_placeholder" />
+
+                            <androidx.appcompat.widget.AppCompatButton
+                                android:id="@+id/btnAddPhoto2"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="@dimen/_5ssp"
+                                android:background="@color/transparent_color"
+                                android:text="Photo 2"
+                                android:textAllCaps="false"
+                                android:textColor="@color/primary_color" />
+                        </androidx.appcompat.widget.LinearLayoutCompat>
+
+                        <androidx.appcompat.widget.LinearLayoutCompat
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="5dp"
+                            android:gravity="center"
+                            android:orientation="vertical">
+
+                            <androidx.appcompat.widget.AppCompatImageView
+                                android:id="@+id/iv_photo3"
+                                android:layout_width="@dimen/_65ssp"
+                                android:layout_height="@dimen/_65ssp"
+                                android:layout_gravity="center"
+                                android:src="@drawable/image_placeholder" />
+
+                            <androidx.appcompat.widget.AppCompatButton
+                                android:id="@+id/btnAddPhoto3"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="@dimen/_5ssp"
+                                android:background="@color/transparent_color"
+                                android:text="Photo 3"
+                                android:textAllCaps="false"
+                                android:textColor="@color/primary_color" />
+                        </androidx.appcompat.widget.LinearLayoutCompat>
+                    </androidx.appcompat.widget.LinearLayoutCompat>
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/_10ssp"
+                        android:text="@string/business_name"
+                        android:textColor="@color/black"
+                        android:visibility="gone"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/iv_business" />
+
+                    <androidx.appcompat.widget.AppCompatEditText
+                        android:id="@+id/etPoliName"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/_3ssp"
+                        android:background="@drawable/white_shape_edit"
+                        android:hint="Enter Name"
+                        android:inputType="textPersonName"
+                        android:paddingHorizontal="@dimen/_8ssp"
+                        android:paddingVertical="@dimen/_8ssp"
+                        android:paddingLeft="@dimen/_8ssp"
+                        android:paddingTop="@dimen/_8ssp"
+                        android:paddingRight="@dimen/_8ssp"
+                        android:paddingBottom="@dimen/_8ssp" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/_5ssp"
+                        android:text="Enter Name"
+                        android:textColor="@color/black"
+                        android:visibility="invisible"
+                        app:layout_constraintStart_toStartOf="@id/etBusinessName"
+                        app:layout_constraintTop_toBottomOf="@id/etBusinessName" />
+
+                    <androidx.appcompat.widget.AppCompatEditText
+                        android:id="@+id/etPoliDesignation"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/_3ssp"
+                        android:background="@drawable/white_shape_edit"
+                        android:hint="Enter Designation"
+                        android:paddingHorizontal="@dimen/_8ssp"
+                        android:paddingVertical="@dimen/_8ssp"
+                        android:paddingLeft="@dimen/_8ssp"
+                        android:paddingTop="@dimen/_8ssp"
+                        android:paddingRight="@dimen/_8ssp"
+                        android:paddingBottom="@dimen/_8ssp"
+                        app:layout_constraintEnd_toEndOf="@id/etBusinessName"
+                        app:layout_constraintStart_toStartOf="@id/textView10"
+                        app:layout_constraintTop_toBottomOf="@id/textView10" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/_5ssp"
+                        android:text="@string/business_email"
+                        android:textColor="@color/black"
+                        android:visibility="invisible"
+                        app:layout_constraintStart_toStartOf="@id/etBusinessName"
+                        app:layout_constraintTop_toBottomOf="@id/etBusinessNumber" />
+
+                    <androidx.appcompat.widget.AppCompatEditText
+                        android:id="@+id/etPoliMoNumber"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/_3ssp"
+                        android:background="@drawable/white_shape_edit"
+                        android:hint="Enter Mobile Number"
+                        android:inputType="textEmailAddress"
+                        android:paddingHorizontal="@dimen/_8ssp"
+                        android:paddingVertical="@dimen/_8ssp"
+                        android:paddingLeft="@dimen/_8ssp"
+                        android:paddingTop="@dimen/_8ssp"
+                        android:paddingRight="@dimen/_8ssp"
+                        android:paddingBottom="@dimen/_8ssp" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/_5ssp"
+                        android:text="@string/business_website"
+                        android:textColor="@color/black"
+                        android:visibility="invisible"
+                        app:layout_constraintStart_toStartOf="@id/etBusinessName"
+                        app:layout_constraintTop_toBottomOf="@id/etBusinessNumber" />
+
+                    <androidx.appcompat.widget.AppCompatEditText
+                        android:id="@+id/etPoliFacebookUsername"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/_3ssp"
+                        android:background="@drawable/rounded_border"
+                        android:hint="Facebook Username"
+                        android:inputType="textWebEditText"
+                        android:paddingHorizontal="@dimen/_8ssp"
+                        android:paddingVertical="@dimen/_8ssp"
+                        android:paddingLeft="@dimen/_8ssp"
+                        android:paddingTop="@dimen/_8ssp"
+                        android:paddingRight="@dimen/_8ssp"
+                        android:paddingBottom="@dimen/_8ssp" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/_5ssp"
+                        android:text="@string/business_address"
+                        android:textColor="@color/black"
+                        android:visibility="invisible"
+                        app:layout_constraintStart_toStartOf="@id/etBusinessName"
+                        app:layout_constraintTop_toBottomOf="@id/etBusinessNumber" />
+
+                    <androidx.appcompat.widget.AppCompatEditText
+                        android:id="@+id/etPoliInstagramUsername"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/_3ssp"
+                        android:background="@drawable/rounded_border"
+                        android:hint="Instagram Username"
+                        android:inputType="textWebEditText"
+                        android:paddingHorizontal="@dimen/_8ssp"
+                        android:paddingVertical="@dimen/_8ssp"
+                        android:paddingLeft="@dimen/_8ssp"
+                        android:paddingTop="@dimen/_8ssp"
+                        android:paddingRight="@dimen/_8ssp"
+                        android:paddingBottom="@dimen/_8ssp"/>
+
+                    <androidx.appcompat.widget.AppCompatButton
+                        android:id="@+id/btn_poli_save"
+                        android:layout_width="150dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+                        android:layout_marginVertical="@dimen/_10ssp"
+                        android:layout_marginTop="@dimen/_10ssp"
+                        android:layout_marginBottom="@dimen/_10ssp"
+                        android:background="@drawable/btn_rounded"
+                        android:backgroundTint="@color/primary_color"
+                        android:text="@string/save"
+                        android:textAllCaps="false"
+                        android:textColor="@color/al_white" />
+                </androidx.appcompat.widget.LinearLayoutCompat>
+            </androidx.appcompat.widget.LinearLayoutCompat>
+        </ScrollView>
+
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:id="@+id/ll_adview"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+</layout>

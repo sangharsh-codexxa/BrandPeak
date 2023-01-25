@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "142270506550",
+    "project_id": "edit-karo-9279e",
+    "storage_bucket": "edit-karo-9279e.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:142270506550:android:eab645d4f93ddc5d831a97",
+        "android_client_info": {
+          "package_name": "com.example.ready"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "142270506550-49n3v484mtjcjqunkngevbtaeelcan9g.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.ready",
+            "certificate_hash": "cb817731fe2031322c8cb7a953060ff04d4f19ec"
+          }
+        },
+        {
+          "client_id": "142270506550-c18pgkaij3n26l0i08af7ho0d19mkag1.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDA76tkEf00yBOL2COKTiKmTrGGiLWmzVc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "142270506550-c18pgkaij3n26l0i08af7ho0d19mkag1.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
