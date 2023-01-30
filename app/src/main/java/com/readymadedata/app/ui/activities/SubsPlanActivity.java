@@ -116,8 +116,12 @@ public class SubsPlanActivity extends AppCompatActivity implements PaymentResult
                         if (listResource.data != null) {
                             for(int i=0;i<=listResource.data.size();i++) {
                                 try {
-                                    if (!userItem.planDuration.equals(listResource.data.get(i))) {
-                                        setData(listResource.data);
+                                    try {
+                                        if (!userItem.planDuration.equals(listResource.data.get(i))) {
+                                            setData(listResource.data);
+                                        }
+                                    }catch (NullPointerException e){
+                                        recreate();
                                     }
                                 }catch (IndexOutOfBoundsException e){
                                     e.printStackTrace();
@@ -163,8 +167,6 @@ public class SubsPlanActivity extends AppCompatActivity implements PaymentResult
                 userItem = item.user;
             }
         });
-
-
 
 
     }
@@ -335,7 +337,7 @@ public class SubsPlanActivity extends AppCompatActivity implements PaymentResult
         /**
          * Set your logo here
          */
-        checkout.setImage(R.drawable.login_logo);
+        checkout.setImage(R.drawable.logo);
 
         /**
          * Reference to current activity
@@ -347,13 +349,13 @@ public class SubsPlanActivity extends AppCompatActivity implements PaymentResult
          */
         try {
             JSONObject options = new JSONObject();
-            options.put("name", "Sangharsh");
+            options.put("name", "Editkro");
             options.put("description", "Charge Of Plan");
             options.put("theme.color", "#f59614");
             options.put("send_sms_hash", true);
             options.put("allow_rotation", true);
             options.put("currency", "INR");
-            options.put("amount", (float) 12 * 100);//pass amount in currency subunits
+            options.put("amount", (float) planPrice * 100);//pass amount in currency subunits
 //            options.put("prefill.email", userItem.email);
 //            if (userItem.phone != null && !userItem.phone.equals("")) {
 //                options.put("prefill.contact", userItem.phone);
@@ -462,9 +464,8 @@ public class SubsPlanActivity extends AppCompatActivity implements PaymentResult
     @Override
     public void onPaymentError(int i, String s) {
         dialogMsg.cancel();
-
-        dialogMsg.showErrorDialog(s, getString(R.string.ok));
-        dialogMsg.show();
+//        dialogMsg.showErrorDialog(s, getString(R.string.ok));
+//        dialogMsg.show();
 
     }
 }

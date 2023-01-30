@@ -11,18 +11,22 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProvider;
 
 import com.arthenica.mobileffmpeg.Config;
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.textview.MaterialTextView;
 import com.readymadedata.app.R;
 import com.readymadedata.app.binding.GlideBinding;
+import com.readymadedata.app.items.UserItem;
 import com.readymadedata.app.ui.activities.AddBusinessActivity;
 import com.readymadedata.app.ui.activities.SplashyActivity;
 import com.readymadedata.app.ui.activities.SubsPlanActivity;
+import com.readymadedata.app.ui.dialog.DialogMsg;
 import com.readymadedata.app.utils.Constant;
 import com.readymadedata.app.utils.PrefManager;
 import com.readymadedata.app.utils.Util;
+import com.readymadedata.app.viewmodel.UserViewModel;
 
 public class ProfileFragment extends Fragment {
 
@@ -32,6 +36,7 @@ public class ProfileFragment extends Fragment {
     }
 
     ImageButton btnEdit;
+    DialogMsg dialogMsg;
     MaterialTextView btnLogOut;
     MaterialTextView btnMyPlan;
     MaterialTextView btnMyPost;
@@ -46,7 +51,8 @@ public class ProfileFragment extends Fragment {
     PrefManager prefManager;
     View f1v;
 
-
+    UserViewModel userViewModel;
+    UserItem userItem;
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -57,6 +63,7 @@ public class ProfileFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         f1v = inflater.inflate(R.layout.fragment_profile, container, false);
+        dialogMsg = new DialogMsg(getActivity(), false);
 
         prefManager = new PrefManager(getContext());
         btnMyPost = f1v.findViewById(R.id.btn_myPost);
@@ -84,9 +91,15 @@ public class ProfileFragment extends Fragment {
         } catch (NullPointerException e) {
             e.printStackTrace();
         }
+        userViewModel = new ViewModelProvider(this).get(UserViewModel.class);
+        userViewModel.getDbUserData(prefManager.getString(Constant.USER_ID)).observe(this.getActivity(), result -> {
+            if (result != null) {
+                userItem = result.user;
+            }
+        });
+//        btnMyPlan.setOnClickListener(e-> {
 
         btnMyPlan.setOnClickListener(e-> {
-//              startActivity(new Intent(this.getActivity(),SubsPlanActivity.class));
                 setupFragment(new PlanInfoFragment());
         });
 
@@ -155,7 +168,12 @@ public class ProfileFragment extends Fragment {
         btnUpgrade.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(f1v.getContext(), SubsPlanActivity.class));
+                if (userItem.isSubscribed) {
+                    showWarningDialogue();
+                } else {
+                    startActivity(new Intent(f1v.getContext(), SubsPlanActivity.class));
+                }
+//                startActivity(new Intent(f1v.getContext(), SubsPlanActivity.class));
             }
         });
 
@@ -208,5 +226,14 @@ public class ProfileFragment extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
+    }
+
+    private void showWarningDialogue() {
+        dialogMsg.showConfirmDialog("Already Subscribed!", "Are you want to upgrade your plan?", "Upgrade Now", getString(R.string.cancel));
+        dialogMsg.show();
+        dialogMsg.okBtn.setOnClickListener(v -> {
+            dialogMsg.cancel();
+            startActivity(new Intent(this.getActivity(),SubsPlanActivity.class));
+        });
     }
 }

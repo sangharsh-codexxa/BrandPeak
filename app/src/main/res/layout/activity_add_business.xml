@@ -79,14 +79,16 @@
                     android:id="@+id/lvl_business_type"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:visibility="gone"
                     android:orientation="vertical"
-                    android:visibility="gone">
+                    >
 
                     <androidx.appcompat.widget.LinearLayoutCompat
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="5dp"
                         android:gravity="center"
+
                         android:orientation="horizontal">
 
                         <androidx.appcompat.widget.AppCompatImageView
@@ -111,7 +113,7 @@
                     <androidx.appcompat.widget.AppCompatTextView
                         android:id="@+id/textView8"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:layout_height="2dp"
                         android:layout_marginTop="@dimen/_10ssp"
 
                         android:text="@string/business_name"
@@ -138,7 +140,7 @@
                     <androidx.appcompat.widget.AppCompatTextView
                         android:id="@+id/textView10"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:layout_height="2dp"
                         android:layout_marginTop="@dimen/_5ssp"
                         android:text="@string/business_phone_number"
                         android:textColor="@color/black"
@@ -167,7 +169,7 @@
                     <androidx.appcompat.widget.AppCompatTextView
                         android:id="@+id/textView11"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:layout_height="2dp"
                         android:layout_marginTop="@dimen/_5ssp"
                         android:text="@string/business_email"
                         android:textColor="@color/black"
@@ -193,7 +195,7 @@
                     <androidx.appcompat.widget.AppCompatTextView
                         android:id="@+id/textView12"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:layout_height="2dp"
                         android:layout_marginTop="@dimen/_5ssp"
                         android:text="@string/business_website"
                         android:textColor="@color/black"
@@ -218,7 +220,7 @@
 
                     <androidx.appcompat.widget.AppCompatTextView
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:layout_height="2dp"
                         android:layout_marginTop="@dimen/_5ssp"
                         android:text="@string/business_address"
                         android:textColor="@color/black"
@@ -272,6 +274,7 @@
                         android:gravity="center"
                         android:orientation="horizontal">
 
+
                         <androidx.appcompat.widget.AppCompatImageView
                             android:id="@+id/iv_personal"
                             android:layout_width="@dimen/_65ssp"
@@ -292,7 +295,7 @@
 
                     <androidx.appcompat.widget.AppCompatTextView
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:layout_height="0dp"
                         android:layout_marginTop="@dimen/_10ssp"
                         android:text="@string/business_name"
                         android:textColor="@color/black"
@@ -316,7 +319,7 @@
 
                     <androidx.appcompat.widget.AppCompatTextView
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:layout_height="0dp"
                         android:layout_marginTop="@dimen/_5ssp"
                         android:text="@string/business_phone_number"
                         android:textColor="@color/black"
@@ -344,7 +347,7 @@
 
                     <androidx.appcompat.widget.AppCompatTextView
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:layout_height="0dp"
                         android:layout_marginTop="@dimen/_5ssp"
                         android:text="@string/business_email"
                         android:textColor="@color/black"
@@ -369,7 +372,7 @@
 
                     <androidx.appcompat.widget.AppCompatTextView
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:layout_height="0dp"
                         android:layout_marginTop="@dimen/_5ssp"
                         android:text="@string/business_website"
                         android:textColor="@color/black"
@@ -381,6 +384,7 @@
                         android:id="@+id/etFacebookUsername"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:layout_marginBottom="1dp"
                         android:layout_marginTop="@dimen/_3ssp"
                         android:background="@drawable/rounded_border"
                         android:hint="Facebook Username"
@@ -395,7 +399,7 @@
                     <androidx.appcompat.widget.AppCompatTextView
                         android:id="@+id/textView13"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:layout_height="0dp"
                         android:layout_marginTop="@dimen/_5ssp"
                         android:text="@string/business_address"
                         android:textColor="@color/black"
@@ -582,11 +586,11 @@
 
                     <androidx.appcompat.widget.AppCompatTextView
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:layout_height="5dp"
                         android:layout_marginTop="@dimen/_10ssp"
                         android:text="@string/business_name"
                         android:textColor="@color/black"
-                        android:visibility="gone"
+                        android:visibility="invisible"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@id/iv_business" />
 
@@ -607,7 +611,7 @@
 
                     <androidx.appcompat.widget.AppCompatTextView
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:layout_height="2dp"
                         android:layout_marginTop="@dimen/_5ssp"
                         android:text="Enter Name"
                         android:textColor="@color/black"
@@ -634,7 +638,7 @@
 
                     <androidx.appcompat.widget.AppCompatTextView
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:layout_height="2dp"
                         android:layout_marginTop="@dimen/_5ssp"
                         android:text="@string/business_email"
                         android:textColor="@color/black"
@@ -659,7 +663,7 @@
 
                     <androidx.appcompat.widget.AppCompatTextView
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:layout_height="2dp"
                         android:layout_marginTop="@dimen/_5ssp"
                         android:text="@string/business_website"
                         android:textColor="@color/black"
@@ -684,7 +688,7 @@
 
                     <androidx.appcompat.widget.AppCompatTextView
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:layout_height="2dp"
                         android:layout_marginTop="@dimen/_5ssp"
                         android:text="@string/business_address"
                         android:textColor="@color/black"

@@ -93,6 +93,7 @@ import com.readymadedata.app.databinding.BusinessFrame3Binding;
 import com.readymadedata.app.databinding.Frame1Binding;
 import com.readymadedata.app.databinding.Frame6Binding;
 import com.readymadedata.app.databinding.PersonalFrame1Binding;
+import com.readymadedata.app.databinding.PersonalFrame2Binding;
 import com.readymadedata.app.databinding.PoliticalFrame2Binding;
 import com.readymadedata.app.items.AddTextItem;
 import com.readymadedata.app.items.BusinessItem;
@@ -361,9 +362,6 @@ public class EditorActivity extends AppCompatActivity implements InterstitialAdM
         setPostData();
 
 
-
-
-        loadFrameData();
         Log.e("Type>>>>>>>", type);
     }
 
@@ -403,15 +401,13 @@ public class EditorActivity extends AppCompatActivity implements InterstitialAdM
                         businessWebsite = ((BusinessItem) response.body().get(0)).website;
                         logo = ((BusinessItem) response.body().get(0)).logo;
                         businessAddress = ((BusinessItem) response.body().get(0)).address;
-
+                        loadFrameData();
 
                     } else {
                         progressDialog.setMessage(response.message());
 
                         Log.e("BusinessError=====>", response.message());
                     }
-
-
                 }
 
                 public void onFailure(Call<List<BusinessItem>> call, Throwable t) {
@@ -422,11 +418,13 @@ public class EditorActivity extends AppCompatActivity implements InterstitialAdM
                 }
             });
 
-        } else if (this.prefManager.getString(Constant.PRIMARY_CATEGORY).equals("1")) {
+        }
+
+        if (prefManager.getString(Constant.PRIMARY_CATEGORY).equals("1")) {
 //            Toast.makeText(this, "Call Personal", Toast.LENGTH_SHORT).show();
             type = "personal";
 //            progressDialog.show();
-            ApiClient.getApiService().getPersonalCall("sdghhgh416546dd5654wst56w4646w46", this.prefManager.getString(Constant.USER_ID)).enqueue(new Callback<List<PersonalItem>>() {
+            ApiClient.getApiService().getPersonalCall("sdghhgh416546dd5654wst56w4646w46", prefManager.getString(Constant.USER_ID)).enqueue(new Callback<List<PersonalItem>>() {
 
 
                 public void onResponse(Call<List<PersonalItem>> call, Response<List<PersonalItem>> response) {
@@ -440,7 +438,7 @@ public class EditorActivity extends AppCompatActivity implements InterstitialAdM
                         logo = ((PersonalItem) response.body().get(0)).logo;
                         personalFacebook = ((PersonalItem) response.body().get(0)).face_username;
                         personalInstagram = ((PersonalItem) response.body().get(0)).insta_username;
-
+                        loadFrameData();
 
                     } else {
                         progressDialog.cancel();
@@ -457,9 +455,10 @@ public class EditorActivity extends AppCompatActivity implements InterstitialAdM
 
                 }
             });
-        } else {
-            type = "political";
+        }
 
+        if (prefManager.getString(Constant.PRIMARY_CATEGORY).equals("2")) {
+            type = "political";
             ApiClient.getApiService().getPoliticalCall("sdghhgh416546dd5654wst56w4646w46", prefManager.getString(Constant.USER_ID)).enqueue(new Callback<List<PoliticalItem>>() {
 
                 public void onResponse(Call<List<PoliticalItem>> call, Response<List<PoliticalItem>> response) {
@@ -479,6 +478,7 @@ public class EditorActivity extends AppCompatActivity implements InterstitialAdM
                         imgB = ((PoliticalItem) response.body().get(0)).photo2;
                         imgC = ((PoliticalItem) response.body().get(0)).photo3;
 //                      progress = ((PoliticalItem) response.body().get(0)).profile;
+                        loadFrameData();
                         return;
                     }
                     throw new AssertionError();
@@ -491,6 +491,8 @@ public class EditorActivity extends AppCompatActivity implements InterstitialAdM
                 }
             });
         }
+
+
     }
 
 
@@ -501,100 +503,98 @@ public class EditorActivity extends AppCompatActivity implements InterstitialAdM
         binding.rvFrame.setLayoutManager(layoutManager);
 
 
-        if (type.equals(Constant.BUSINESS)) {
+        userViewModel.getFrameData(prefManager.getString(Constant.USER_ID)).observe(this, result -> {
+            if (result != null) {
+                if (result.data != null) {
+                    if (type.equals(Constant.BUSINESS)) {
 
+                        frameAdapter = new FrameAdapter(this, position -> {
 
-            frameAdapter = new FrameAdapter(this, position -> {
+                            frameAdapter.setSelected(position);
+                            currentPosition = position;
+                            setFrameData(frameItemList.get(position));
+                        }, 3, getResources().getDimension(com.intuit.ssp.R.dimen._2ssp));
+                        frameAdapter.setSelected(0);
+                        binding.ibNextFrameApply.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
 
-                frameAdapter.setSelected(position);
-                currentPosition = position;
-                setFrameData(frameItemList.get(position));
-            }, 3, getResources().getDimension(com.intuit.ssp.R.dimen._2ssp));
+                                currentPosition++;
+                                if (currentPosition > frameItemList.size()) {
 
-            frameAdapter.setSelected(0);
-
-
-            binding.ibNextFrameApply.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-
-                    currentPosition++;
-                    if (currentPosition > frameItemList.size()) {
-
-                        Log.e("CurrentPosition----->", String.valueOf(currentPosition));
+                                    Log.e("CurrentPosition----->", String.valueOf(currentPosition));
 //                    for (int i = 0; i <= frameItemList.size(); i++) {
 
-                        try {
-                            setFrameData(frameItemList.get(currentPosition));
-                            frameAdapter.setSelected(currentPosition);
-                        } catch (IndexOutOfBoundsException e) {
+                                    try {
+                                        setFrameData(frameItemList.get(currentPosition));
+                                        frameAdapter.setSelected(currentPosition);
+                                    } catch (IndexOutOfBoundsException e) {
 //                            binding.ibNextFrameApply.setClickable(false);
 //                            binding.ibNextFrameApply.setAlpha( 0.5f);
-                            Toast.makeText(EditorActivity.this, "Last Frame" + String.valueOf(currentPosition), Toast.LENGTH_SHORT).show();
-                            currentPosition = frameItemList.size();
-                            e.printStackTrace();
-                        }
-                    }
-                }
+                                        Toast.makeText(EditorActivity.this, "Last Frame" + String.valueOf(currentPosition), Toast.LENGTH_SHORT).show();
+                                        currentPosition = frameItemList.size();
+                                        e.printStackTrace();
+                                    }
+                                }
+                            }
 
 
-            });
+                        });
+                        binding.ibPrevFrameApply.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                currentPosition--;
+                                try {
+                                    setFrameData(frameItemList.get(currentPosition));
+                                    frameAdapter.setSelected(currentPosition);
+                                } catch (IndexOutOfBoundsException e) {
+                                    e.printStackTrace();
+                                    currentPosition = 0;
+                                    Toast.makeText(EditorActivity.this, "Last Frame" + String.valueOf(currentPosition), Toast.LENGTH_SHORT).show();
+                                }
+                            }
+                        });
 
-            binding.ibPrevFrameApply.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    currentPosition--;
-                    try {
-                        setFrameData(frameItemList.get(currentPosition));
-                        frameAdapter.setSelected(currentPosition);
-                    } catch (IndexOutOfBoundsException e) {
-                        e.printStackTrace();
-                        currentPosition = 0;
-                        Toast.makeText(EditorActivity.this, "Last Frame" + String.valueOf(currentPosition), Toast.LENGTH_SHORT).show();
-                    }
-                }
-            });
-
-//            SnapHelper snapHelper = new PagerSnapHelper();
-//
-//            snapHelper.attachToRecyclerView(binding.rvFrame);
-            binding.rvFrame.setAdapter(frameAdapter);
-
-            userViewModel.getFrameData(prefManager.getString(Constant.USER_ID)).observe(this, result -> {
-                if (result != null) {
-                    if (result.data != null) {
+                        binding.rvFrame.setAdapter(frameAdapter);
                         frameItemList.clear();
-                        Log.e("DataSize---->", String.valueOf(result.data.size()));
+
                         frameItemList.add(new FrameItem(false, "", Frame6Binding.inflate(getLayoutInflater()).getRoot(), R.drawable.business_frame_preview, false));
-//                        frameItemList.add(new FrameItem(false, "", BusinessFrame2Binding.inflate(getLayoutInflater()).getRoot(), R.drawable.business_frame_preview, false));
-//                        frameItemList.add(new FrameItem(false, "", BusinessFrame3Binding.inflate(getLayoutInflater()).getRoot(), R.drawable.business_frame_preview, false));
-                        frameItemList.add(new FrameItem(false, "", Frame1Binding.inflate(getLayoutInflater()).getRoot(), R.drawable.business_frame_preview, false));
 
                         for (int i = 0; i < result.data.size(); i++) {
                             frameItemList.add(new FrameItem(true, result.data.get(i).imageUrl, null, R.drawable.frame_preview_8, false));
                         }
                         frameAdapter.setFrameItemList(frameItemList);
                         setFrameData(frameItemList.get(0));
+
+
                     }
                 }
-            });
-        } else if (type.equals("personal")) {
+            }
+        });
+
+        if (type.equals("personal")) {
 
             personalFrameAdapter = new PersonalFrameAdapter(this, position -> {
-
                 personalFrameAdapter.setSelected(position);
+                currentPosition = position;
                 setFrameData(personalFrameList.get(position));
             }, 3, 2);
+            personalFrameAdapter.setSelected(0);
             binding.rvFrame.setAdapter(personalFrameAdapter);
+
+
             userViewModel.getFrameData(prefManager.getString(Constant.USER_ID)).observe(this, result -> {
                 if (result != null) {
                     if (result.data != null) {
-                        progressDialog.cancel();
+                        personalFrameList.clear();
+
 
                         Log.e("ResultFrames====>", String.valueOf(result.data.size()));
-                        personalFrameList.clear();
-                        personalFrameList.add(new FrameItem(false, "", PersonalFrame1Binding.inflate(getLayoutInflater()).getRoot(), R.drawable.personal_frame, false));
-//                                personalFrameList.add(new FrameItem(false, "", Frame2Binding.inflate(getLayoutInflater()).getRoot(), R.drawable.frame_preview_2, false));
+
+                        personalFrameList.add(new FrameItem(false, "", PersonalFrame1Binding.inflate(getLayoutInflater()).getRoot(), R.drawable.personal_frame_preview, false));
+//                        personalFrameList.add(new FrameItem(false, "", PersonalFrame2Binding.inflate(getLayoutInflater()).getRoot(), R.drawable.personal_frame, false));
+
+                        //        personalFrameList.add(new FrameItem(false, "", Frame2Binding.inflate(getLayoutInflater()).getRoot(), R.drawable.frame_preview_2, false));
 //                                personalFrameList.add(new FrameItem(false, "", Frame3Binding.inflate(getLayoutInflater()).getRoot(), R.drawable.frame_preview_3, false));
 //                                frameItemList.add(new FrameItem(false, "", Frame4Binding.inflate(getLayoutInflater()).getRoot(), R.drawable.frame_preview_4, false));
 //                                frameItemList.add(new FrameItem(false, "", Frame5Binding.inflate(getLayoutInflater()).getRoot(), R.drawable.frame_preview_5, true));
@@ -610,6 +610,7 @@ public class EditorActivity extends AppCompatActivity implements InterstitialAdM
                 }
             });
         }
+
         if (type.equals("political")) {
             politicalFrameAdapter = new PoliticalFrameAdapter(this, position -> {
                 politicalFrameAdapter.setSelected(position);
@@ -621,7 +622,7 @@ public class EditorActivity extends AppCompatActivity implements InterstitialAdM
                     if (result.data != null) {
                         politicalFrameList.clear();
 //                        politicalFrameList.add(new FrameItem(false, "", PoliticalFrame1Binding.inflate(getLayoutInflater()).getRoot(), R.drawable.frame_preview_1, false));
-                        politicalFrameList.add(new FrameItem(false, "", PoliticalFrame2Binding.inflate(getLayoutInflater()).getRoot(), R.drawable.politic_preview_1, false));
+                        politicalFrameList.add(new FrameItem(false, "", PoliticalFrame2Binding.inflate(getLayoutInflater()).getRoot(), R.drawable.political_frame_preview, false));
 //                                frameItemList.add(new FrameItem(false, "", Frame3Binding.inflate(getLayoutInflater()).getRoot(), R.drawable.frame_preview_3, false));
 //                                frameItemList.add(new FrameItem(false, "", Frame4Binding.inflate(getLayoutInflater()).getRoot(), R.drawable.frame_preview_4, false));
 //                                frameItemList.add(new FrameItem(false, "", Frame5Binding.inflate(getLayoutInflater()).getRoot(), R.drawable.frame_preview_5, true));
@@ -773,30 +774,30 @@ public class EditorActivity extends AppCompatActivity implements InterstitialAdM
         binding.toolbar.txtEdit.setOnClickListener(v -> {
             setBackImage();
             removeControl();
-           if(type.equals("business")){
-               if (iv_close_name.getVisibility() == GONE && iv_close_phone.getVisibility() == GONE && iv_close_email.getVisibility() == GONE && iv_close_website.getVisibility() == GONE && iv_close_address.getVisibility() == GONE) {
-                   fileName = System.currentTimeMillis() + ".jpeg";
-                   new LoadSaveImage().execute();
-               }else{
-                   Toast.makeText(this, "Please unselect your selected items.", Toast.LENGTH_SHORT).show();
-               }
-           }
-
-            if(type.equals("political")){
-                if (iv_close_name.getVisibility() == GONE && iv_close_phone.getVisibility() == GONE && iv_fb_close.getVisibility() == GONE && iv_insta_close.getVisibility() == GONE ) {
+            if (type.equals("business")) {
+                if (iv_close_name.getVisibility() == GONE && iv_close_phone.getVisibility() == GONE && iv_close_email.getVisibility() == GONE && iv_close_website.getVisibility() == GONE && iv_close_address.getVisibility() == GONE) {
                     fileName = System.currentTimeMillis() + ".jpeg";
                     new LoadSaveImage().execute();
-                }else{
+                } else {
+                    Toast.makeText(this, "Please unselect your selected items.", Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            if (type.equals("political")) {
+                if (iv_close_name.getVisibility() == GONE && iv_close_phone.getVisibility() == GONE && iv_fb_close.getVisibility() == GONE && iv_insta_close.getVisibility() == GONE) {
+                    fileName = System.currentTimeMillis() + ".jpeg";
+                    new LoadSaveImage().execute();
+                } else {
                     Toast.makeText(this, "Please unselect your selected items.", Toast.LENGTH_SHORT).show();
                 }
             }
 
 
-            if(type.equals("personal")){
+            if (type.equals("personal")) {
                 if (iv_close_name.getVisibility() == GONE && iv_close_phone.getVisibility() == GONE && iv_fb_close.getVisibility() == GONE && iv_insta_close.getVisibility() == GONE && iv_close_address.getVisibility() == GONE) {
                     fileName = System.currentTimeMillis() + ".jpeg";
                     new LoadSaveImage().execute();
-                }else{
+                } else {
                     Toast.makeText(this, "Please unselect your selected items.", Toast.LENGTH_SHORT).show();
                 }
             }
@@ -1345,14 +1346,13 @@ public class EditorActivity extends AppCompatActivity implements InterstitialAdM
                         }
 
                         if (type.equals("personal")) {
-                            if (!isTextSelected() && iv_close_name.getVisibility() == View.GONE  &&
-                                    iv_close_address.getVisibility() == View.GONE && iv_close_phone.getVisibility() == View.GONE) {
+                            if (!isTextSelected() && iv_close_name.getVisibility() == View.GONE &&
+                                    iv_close_address.getVisibility() == View.GONE && iv_close_phone.getVisibility() == View.GONE && iv_insta_close.getVisibility() == View.GONE && iv_fb_close.getVisibility() == View.GONE) {
                                 tv_personal_address.setTextColor(color);
                                 tv_persnol_num.setTextColor(color);
                                 tv_personal_name.setTextColor(color);
                                 tv_facebook_personal.setTextColor(color);
                                 tv_insta_personal.setTextColor(color);
-
 
                                 for (int i = 0; i < addTextList.size(); i++) {
                                     addTextList.get(i).tv_text.setTextColor(color);
@@ -1374,7 +1374,7 @@ public class EditorActivity extends AppCompatActivity implements InterstitialAdM
                                 }
 
                                 if (iv_insta_close.getVisibility() == View.VISIBLE) {
-                                    tv_facebook_personal.setTextColor(color);
+                                    tv_insta_personal.setTextColor(color);
                                 }
 
                                 if (isTextSelected() && addTextList.size() > 0) {
@@ -1386,7 +1386,7 @@ public class EditorActivity extends AppCompatActivity implements InterstitialAdM
 
                         if (type.equals("political")) {
                             Toast.makeText(EditorActivity.this, "Political", Toast.LENGTH_SHORT).show();
-                            if (!isTextSelected() && iv_close_name.getVisibility() == View.GONE && iv_insta_close.getVisibility() == View.GONE && iv_fb_close.getVisibility() == View.GONE && iv_close_phone.getVisibility() == View.GONE) {
+                            if (!isTextSelected() && iv_close_name.getVisibility() == View.GONE && iv_insta_close.getVisibility() == View.GONE && iv_fb_close.getVisibility() == View.GONE && iv_close_phone.getVisibility() == View.GONE && iv_designation_close.getVisibility() == GONE) {
                                 tv_designation_poli.setTextColor(color);
                                 tv_face_poli.setTextColor(color);
                                 tv_mob_poli.setTextColor(color);
@@ -1424,7 +1424,6 @@ public class EditorActivity extends AppCompatActivity implements InterstitialAdM
 
                             }
                         }
-
 
 
                     } else {
@@ -1566,6 +1565,13 @@ public class EditorActivity extends AppCompatActivity implements InterstitialAdM
                 fl_address.setVisibility(visible == 0 ? GONE : VISIBLE);
                 visible = fl_address.getVisibility();
                 binding.cbAdress.setChecked(visible == 0);
+            });
+
+            binding.cbLogo.setOnClickListener(v -> {
+                int visible = fl_logo.getVisibility();
+                fl_logo.setVisibility(visible == 0 ? GONE : VISIBLE);
+                visible = fl_logo.getVisibility();
+                binding.cbLogo.setChecked(visible == 0);
             });
 
             binding.cbPhone.setOnClickListener(v -> {
@@ -2230,7 +2236,7 @@ public class EditorActivity extends AppCompatActivity implements InterstitialAdM
                 .load(Constant.bitmap)
                 .into(iv_preview);
 
-        if (iv_close_name.getVisibility() != GONE || iv_close_phone.getVisibility() != GONE ) {
+        if (iv_close_name.getVisibility() != GONE || iv_close_phone.getVisibility() != GONE) {
             iv_close_name.setVisibility(GONE);
             iv_close_phone.setVisibility(GONE);
         }
@@ -2846,7 +2852,7 @@ public class EditorActivity extends AppCompatActivity implements InterstitialAdM
                             iv_close_name.getVisibility() == View.GONE &&
                             iv_close_address.getVisibility() == View.GONE &&
                             iv_fb_close.getVisibility() == View.GONE &&
-                            iv_close_phone.getVisibility() == GONE
+                            iv_close_phone.getVisibility() == GONE && iv_insta_close.getVisibility() == GONE
                     ) {
                         tv_personal_name.setTypeface(typeface);
                         tv_persnol_num.setTypeface(typeface);
@@ -2862,18 +2868,18 @@ public class EditorActivity extends AppCompatActivity implements InterstitialAdM
                         if (iv_close_name.getVisibility() == View.VISIBLE) {
                             tv_personal_name.setTypeface(typeface);
                         }
-
+                        if (iv_close_phone.getVisibility() == View.VISIBLE) {
+                            tv_persnol_num.setTypeface(typeface);
+                        }
                         if (iv_close_address.getVisibility() == View.VISIBLE) {
                             tv_personal_address.setTypeface(typeface);
                         }
-
                         if (iv_fb_close.getVisibility() == View.VISIBLE) {
                             tv_facebook_personal.setTypeface(typeface);
                         }
                         if (iv_insta_close.getVisibility() == View.VISIBLE) {
                             tv_insta_personal.setTypeface(typeface);
                         }
-
                         if (isTextSelected() && addTextList.size() > 0) {
                             addTextList.get(selectedTextPosition).tv_text.setTypeface(typeface);
                         }
@@ -2902,11 +2908,11 @@ public class EditorActivity extends AppCompatActivity implements InterstitialAdM
                         if (iv_designation_close.getVisibility() == View.VISIBLE) {
                             tv_designation_poli.setTypeface(typeface);
                         }
-                        if(iv_fb_close.getVisibility() == VISIBLE){
+                        if (iv_fb_close.getVisibility() == VISIBLE) {
                             tv_face_poli.setTypeface(typeface);
                         }
 
-                        if(iv_insta_close.getVisibility() == VISIBLE){
+                        if (iv_insta_close.getVisibility() == VISIBLE) {
                             tv_insta_poli.setTypeface(typeface);
                         }
 
@@ -3092,21 +3098,20 @@ public class EditorActivity extends AppCompatActivity implements InterstitialAdM
         if (type.equals("business")) {
             if (!this.isFromUrl) {
                 if (iv_close_name.getVisibility() == View.VISIBLE) {
-
-                    tv_personal_name.setTextSize(TypedValue.COMPLEX_UNIT_SP, value);
+                    tv_name.setTextSize(TypedValue.COMPLEX_UNIT_SP, value);
                 }
-
                 if (iv_close_phone.getVisibility() == View.VISIBLE) {
-                    tv_persnol_num.setTextSize(TypedValue.COMPLEX_UNIT_SP, value);
+                    tv_phone.setTextSize(TypedValue.COMPLEX_UNIT_SP, value);
                 }
                 if (iv_close_website.getVisibility() == View.VISIBLE) {
                     tv_website.setTextSize(TypedValue.COMPLEX_UNIT_SP, value);
                 }
-
-
-//                if (iv_close_address.getVisibility() == View.VISIBLE) {
-//                    tv_personal_address.setTextSize(TypedValue.COMPLEX_UNIT_SP, value);
-//                }
+                if (iv_close_address.getVisibility() == View.VISIBLE) {
+                    tv_address.setTextSize(TypedValue.COMPLEX_UNIT_SP, value);
+                }
+                if (iv_close_email.getVisibility() == View.VISIBLE) {
+                    tv_email.setTextSize(TypedValue.COMPLEX_UNIT_SP, value);
+                }
                 if (isTextSelected() && this.addTextList.size() > 0) {
                     addTextList.get(this.selectedTextPosition).tv_text.setTextSize(0, value);
                 }
@@ -3128,9 +3133,9 @@ public class EditorActivity extends AppCompatActivity implements InterstitialAdM
                 if (iv_fb_close.getVisibility() == View.VISIBLE) {
                     tv_facebook_personal.setTextSize(TypedValue.COMPLEX_UNIT_SP, value);
                 }
-              if (iv_close_phone.getVisibility() == View.VISIBLE) {
-                  tv_persnol_num.setTextSize(TypedValue.COMPLEX_UNIT_SP, value);
-              }
+                if (iv_close_phone.getVisibility() == View.VISIBLE) {
+                    tv_persnol_num.setTextSize(TypedValue.COMPLEX_UNIT_SP, value);
+                }
 
                 if (iv_close_address.getVisibility() == View.VISIBLE) {
                     tv_personal_address.setTextSize(TypedValue.COMPLEX_UNIT_SP, value);

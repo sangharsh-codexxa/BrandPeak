@@ -18,7 +18,7 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:background="@drawable/subscription_rounded"
-    android:backgroundTint="#ff9933"
+    android:backgroundTint="#DCAA78"
     android:layout_margin="10dp"
     android:layout_height="wrap_content">
 <LinearLayout
@@ -26,6 +26,9 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="horizontal">
+
+
+
     <TextView
         android:id="@+id/tv_title"
         android:layout_width="0dp"
@@ -41,28 +44,7 @@
         app:layout_constraintTop_toTopOf="parent"
         app:textSize='@{"font_body_size"}' />
 
-    <TextView
-        android:id="@+id/tv_price"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="@dimen/_5ssp"
-        android:text="@{subdata.planPrice}"
-        android:textAllCaps="true"
-        android:textColor="@color/black"
-        app:fonts='@{"extra_bold"}'
-        app:textSize='@{"font_body_s_size"}' />
 
-    <TextView
-        android:id="@+id/tv_discount"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-
-        android:layout_marginEnd="@dimen/_15ssp"
-        android:text="@{subdata.planDiscount}"
-        android:textAllCaps="true"
-        android:textColor="@color/black"
-        app:fonts='@{"extra_bold"}'
-        app:textSize='@{"font_body_xs_size"}' />
 
 
     <TextView
@@ -73,10 +55,28 @@
         android:layout_marginEnd="@dimen/_2ssp"
         android:layout_toStartOf="@+id/tv_discount"
         android:text="₹"
+        android:visibility="gone"
         android:textAllCaps="true"
         android:textColor="@color/black"
         app:fonts='@{"light"}'
         app:textSize='@{"font_body_xs_size"}' />
+
+
+
+    <TextView
+        android:id="@+id/tv_discount"
+        android:visibility="gone"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="@dimen/_15ssp"
+        android:text="@{subdata.planDiscount}"
+        android:textAllCaps="true"
+        android:textColor="@color/black"
+        app:fonts='@{"extra_bold"}'
+        app:textSize='@{"font_body_xs_size"}' />
+
+
+
 
 <!--    <View-->
 <!--        android:layout_width="wrap_content"-->
@@ -93,23 +93,32 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerVertical="true"
-        android:layout_marginEnd="@dimen/_2ssp"
         android:layout_toStartOf="@+id/tv_price"
-        android:text="₹"
+        android:text="₹ "
         android:textAllCaps="true"
         android:textColor="@color/black"
         app:fonts='@{"light"}'
         app:textSize='@{"font_body_s_size"}' />
 
+
+    <TextView
+        android:id="@+id/tv_price"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="@dimen/_5ssp"
+        android:text="@{subdata.planPrice}"
+        android:textAllCaps="true"
+        android:textColor="@color/black"
+        app:fonts='@{"extra_bold"}'
+        app:textSize='@{"font_body_s_size"}' />
 </LinearLayout>
 
     <RelativeLayout
-
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
         <ImageView
-            android:visibility="invisible"
+            android:visibility="gone"
             android:id="@+id/imageView7"
             android:layout_width="@dimen/_15ssp"
             android:layout_height="@dimen/_15ssp"
@@ -236,11 +245,10 @@
                 android:layout_alignParentEnd="true"
                 android:layout_centerVertical="true"
                 android:layout_marginEnd="@dimen/_15ssp"
-                android:text="Start"
+                android:text="Buy now"
                 android:textAllCaps="false"
                 android:textColor="@color/white"
                 android:textSize="20sp"
-                app:fonts='@{"extra_bold"}'
                 />
 
 

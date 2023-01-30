@@ -1,5 +1,7 @@
 package com.readymadedata.app.ui.activities;
 
+import static android.view.View.GONE;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.SearchView;
 import androidx.recyclerview.widget.GridLayoutManager;
@@ -16,6 +18,7 @@ import com.readymadedata.app.adapters.PostAdapter;
 import com.readymadedata.app.api.ApiClient;
 import com.readymadedata.app.databinding.ActivitySearchBinding;
 import com.readymadedata.app.items.PostItem;
+import com.readymadedata.app.ui.dialog.LanguageDialog;
 import com.readymadedata.app.utils.Constant;
 import com.readymadedata.app.utils.PrefManager;
 
@@ -44,15 +47,19 @@ public class SearchActivity extends AppCompatActivity {
         prefManager = new PrefManager(this);
 
 
+        binding.toolbar.toolbarIvLanguage.setVisibility(View.INVISIBLE);
+
 
         if(getIntent().getStringExtra("viewAll")!=null)
         {
             binding.lvlA.setVisibility(View.VISIBLE);
-            binding.svSearchData.setVisibility(View.GONE);
+            binding.svSearchData.setVisibility(GONE);
+            binding.toolbar.toolbarIvLanguage.setVisibility(View.INVISIBLE);
+            binding.toolbar.toolbarIvSearch.setVisibility(View.INVISIBLE);
         }
 
         searchData();
-        binding.rvPost.setLayoutManager(new GridLayoutManager(this, 3));
+        binding.rvPost.setLayoutManager(new GridLayoutManager(this, 2));
 
         originalItems = new ArrayList<>();
 

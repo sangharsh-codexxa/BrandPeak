@@ -2,6 +2,7 @@ package com.readymadedata.app.ui.fragments;
 
 import android.os.Bundle;
 
+import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
@@ -46,21 +47,31 @@ public class PlanInfoFragment extends Fragment {
         userViewModel.getDbUserData(prefManager.getString(Constant.USER_ID)).observe(this.getActivity(), item -> {
             if (item != null) {
                 userItem = item.user;
+
+
                 Log.e("UserId",userItem.planDuration);
-               TextView textView =   view.findViewById(R.id.tv_activePlanInfo);
-                textView.setText("Duration : "+userItem.planDuration);
+                TextView textView =   view.findViewById(R.id.tv_activePlanInfo);
+                textView.setText(userItem.planDuration);
 
                 TextView textView1 =   view.findViewById(R.id.tv_plan_name);
-                textView1.setText("Plan Name : "+userItem.planName);
+                textView1.setText(userItem.planName);
 
 
                 TextView textView2 =   view.findViewById(R.id.tv_duration);
-                textView2.setText("Plan Start Date : "+userItem.planStartDate);
+                textView2.setText(userItem.planStartDate);
 
                 TextView textView3 =   view.findViewById(R.id.tv_plan_endData);
-                textView3.setText("Plan End Date : "+userItem.planEndDate);
+                textView3.setText(userItem.planEndDate);
+                CardView cardView = view.findViewById(R.id.card_active_plan);
+                CardView textView4 = view.findViewById(R.id.card_no_active_plan);
 
-
+                if(userItem.planEndDate.equals("") && userItem.planStartDate.equals("") && userItem.planName.equals("") && userItem.planDuration.equals("")){
+                    textView4.setVisibility(View.VISIBLE);
+                    cardView.setVisibility(View.GONE);
+                }else{
+                    textView4.setVisibility(View.GONE);
+                    cardView.setVisibility(View.VISIBLE);
+                }
 
             }
         });

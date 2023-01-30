@@ -102,7 +102,7 @@ public class MainActivity extends AppCompatActivity {
             prefManager.setBoolean(Constant.NOTIFICATION_FIRST, true);
         }
 
-//        binding.toolbar.toolbarIvLanguage.setVisibility(View.VISIBLE);
+//      binding.toolbar.toolbarIvLanguage.setVisibility(View.VISIBLE);
         binding.toolbar.toolbarIvSearch.setVisibility(View.VISIBLE);
         postViewModel = new ViewModelProvider(this).get(PostViewModel.class);
         binding.toolbar.toolbarIvLanguage.setOnClickListener(v -> {

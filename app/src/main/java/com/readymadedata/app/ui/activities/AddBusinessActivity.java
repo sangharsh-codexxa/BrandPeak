@@ -261,18 +261,22 @@ public class AddBusinessActivity extends AppCompatActivity {
 
                                         dialogMsg.showSuccessDialog(getString(R.string.success), getString(R.string.ok));
                                         dialogMsg.show();
-                                        dialogMsg.okBtn.setOnClickListener(v1 -> {
-                                            Config.BUSINESS_SIZE = businessViewModel.getBusinessCount();
-                                            try {
-                                                BusinessFragment businessFragment = new BusinessFragment();
-                                                businessFragment.setUpViewModel();
-                                            } catch (Exception e) {
+                                            dialogMsg.okBtn.setOnClickListener(v1 -> {
+                                                dialogMsg.cancel();
+                                                startActivity(new Intent(AddBusinessActivity.this,MainActivity.class));
+                                                finish();
+//                                              onBackPressed();
+                                            });
+//                                            Config.BUSINESS_SIZE = businessViewModel.getBusinessCount();
+//                                            try {
+//                                                BusinessFragment businessFragment = new BusinessFragment();
+//                                                businessFragment.setUpViewModel();
+//                                            } catch (Exception e) {
+//
+//                                            }
 
-                                            }
 
-                                            dialogMsg.cancel();
-
-                                        });
+//                                        });
 
                                         break;
                                     case ERROR:
@@ -327,7 +331,9 @@ public class AddBusinessActivity extends AppCompatActivity {
                                             dialogMsg.okBtn.setOnClickListener(v1 -> {
                                                 dialogMsg.cancel();
                                                 Config.BUSINESS_SIZE = businessViewModel.getBusinessCount();
-//                                                onBackPressed();
+                                                startActivity(new Intent(AddBusinessActivity.this,MainActivity.class));
+                                                finish();
+//                                              onBackPressed();
                                             });
 
                                             break;
@@ -461,6 +467,8 @@ public class AddBusinessActivity extends AppCompatActivity {
                                             dialogMsg.okBtn.setOnClickListener(v1 -> {
                                                 dialogMsg.cancel();
                                                 Config.BUSINESS_SIZE = businessViewModel.getBusinessCount();
+                                                startActivity(new Intent(AddBusinessActivity.this,MainActivity.class));
+                                                finish();
 //                                                onBackPressed();
                                             });
 
@@ -518,6 +526,7 @@ public class AddBusinessActivity extends AppCompatActivity {
 
                             Log.e("ResponseOnUpdatePersonal--->", response.message().toString());
 
+
                         }
 
                         @Override
@@ -530,6 +539,8 @@ public class AddBusinessActivity extends AppCompatActivity {
                     dialogMsg.showSuccessDialog(getString(R.string.success), getString(R.string.ok));
                     dialogMsg.okBtn.setOnClickListener(v1 -> {
                         dialogMsg.cancel();
+                        startActivity(new Intent(AddBusinessActivity.this,MainActivity.class));
+                        finish();
 
                     });
                     dialogMsg.show();
@@ -643,6 +654,8 @@ public class AddBusinessActivity extends AppCompatActivity {
                                 dialogMsg.show();
                                 dialogMsg.okBtn.setOnClickListener(v1 -> {
                                     dialogMsg.cancel();
+                                    startActivity(new Intent(AddBusinessActivity.this,MainActivity.class));
+                                    finish();
 //                                    onBackPressed();
                                 });
 
@@ -759,7 +772,10 @@ public class AddBusinessActivity extends AppCompatActivity {
                                 dialogMsg.showSuccessDialog(getString(R.string.success), getString(R.string.ok));
                                 dialogMsg.show();
                                 dialogMsg.okBtn.setOnClickListener(v1 -> {
+
                                     dialogMsg.cancel();
+                                    startActivity(new Intent(AddBusinessActivity.this,MainActivity.class));
+                                    finish();
 //                                    onBackPressed();
                                 });
 

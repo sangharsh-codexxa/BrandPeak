@@ -91,6 +91,7 @@ public class HomeFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         FragmentHomeBinding inflate = FragmentHomeBinding.inflate(getLayoutInflater());
         binding = inflate;
+
         dialogMsg = new DialogMsg(getActivity(), false);
 
         Util.fadeIn(inflate.getRoot(), getContext());
