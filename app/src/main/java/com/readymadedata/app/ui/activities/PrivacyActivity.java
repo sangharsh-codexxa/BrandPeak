@@ -1,5 +1,7 @@
 package com.readymadedata.app.ui.activities;
 
+import static android.view.View.GONE;
+
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
@@ -51,6 +53,9 @@ public class PrivacyActivity extends AppCompatActivity {
         binding.toolbar.toolbarIvMenu.setOnClickListener(v -> {
             onBackPressed();
         });
+
+        binding.toolbar.toolbarIvSearch.setVisibility(GONE);
+        binding.toolbar.toolbarIvLanguage.setVisibility(GONE);
 
         binding.wvPrivacy.getSettings().setJavaScriptEnabled(true);
         String encodedHtml = Base64.encodeToString(privacy.getBytes(),

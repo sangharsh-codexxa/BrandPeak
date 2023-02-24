@@ -3,9 +3,11 @@ package com.readymadedata.app.ui.activities;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -50,6 +52,10 @@ public class VerifyOtpActivity extends AppCompatActivity {
     PrefManager prefManager;
     ProgressDialog prgDialog;
     String phone;
+    TextView tvResendOtpBtn;
+
+    TextView tvOtpTime;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -62,23 +68,80 @@ public class VerifyOtpActivity extends AppCompatActivity {
 
         mAuth = FirebaseAuth.getInstance();
 
-      phone = "+91" + getIntent().getStringExtra("mobile_num");
+        phone = "+91" + getIntent().getStringExtra("mobile_num");
         sendVerificationCode(phone);
         prgDialog = new ProgressDialog(this);
+
+        tvResendOtpBtn = findViewById(R.id.tvResendOtpBtn);
+        tvOtpTime = findViewById(R.id.tv_otp_time);
         String str = "+91" + getIntent().getStringExtra("mobile_num");
 
         prgDialog.setMessage(getResources().getString(R.string.login_loading));
         prgDialog.setCancelable(false);
         btnVerifyOtp = findViewById(R.id.buttonVerify);
 
+
+
         btnVerifyOtp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 verifyCode(pinView.getPin());
-//                startActivity(new Intent(VerifyOtpActivity.this, MainActivity.class));
-//                finish();
             }
         });
+
+
+
+
+        tvResendOtpBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                startTimer();
+                Toast.makeText(VerifyOtpActivity.this, "OTP Sent", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        new CountDownTimer(90000, 1000) {
+
+            public void onTick(long millisUntilFinished) {
+                tvResendOtpBtn.setAlpha(0.4f);
+                tvResendOtpBtn.setClickable(false);
+                tvOtpTime.setText("Wait "+millisUntilFinished / 1000+" Seconds");
+                // logic to set the EditText could go here
+            }
+
+            public void onFinish() {
+                tvOtpTime.setText("00:00");
+                tvResendOtpBtn.setAlpha(1f);
+                tvResendOtpBtn.setClickable(true);
+            }
+        }.start();
+    }
+
+    private void startTimer() {
+        phone = "+91" + getIntent().getStringExtra("mobile_num");
+        sendVerificationCode(phone);
+
+
+        new CountDownTimer(90000, 1000) {
+
+            public void onTick(long millisUntilFinished) {
+                tvOtpTime.setText("Wait "+ millisUntilFinished / 1000+" Seconds");
+
+                tvResendOtpBtn.setAlpha(0.4f);
+                tvResendOtpBtn.setClickable(false);
+                // logic to set the EditText could go here
+            }
+
+            public void onFinish() {
+                tvOtpTime.setText("00:00");
+                tvResendOtpBtn.setAlpha(1f);
+                tvResendOtpBtn.setClickable(true);
+
+
+            }
+
+        }.start();
     }
 
 
@@ -91,19 +154,8 @@ public class VerifyOtpActivity extends AppCompatActivity {
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
 
-//                            prefManager.setBoolean(Constant.IS_LOGIN, true);
-//                            prefManager.setString(Constant.USER_EMAIL, "sangharsh@codexxa.in");
-//                            prefManager.setString(Constant.USER_PASSWORD, "12345678");
-//                            prefManager.setString(Constant.USER_ID, "1");
-//                            prefManager.setString(Constant.LOGIN_TYPE, Constant.NORMAL);
                             addUserNumber();
                             loadBusiness();
-                            // if the code is correct and the task is successful
-                            // we are sending our user to new activity.
-//                            Intent i = new Intent(VerifyOtpActivity.this, MainActivity.class);
-//                            startActivity(i);
-//                            finish();
-
 
                         } else {
                             // if the code is not correct then we are
@@ -121,7 +173,7 @@ public class VerifyOtpActivity extends AppCompatActivity {
         PhoneAuthOptions options =
                 PhoneAuthOptions.newBuilder(mAuth)
                         .setPhoneNumber(number)            // Phone number to verify
-                        .setTimeout(60L, TimeUnit.SECONDS) // Timeout and unit
+                        .setTimeout(30L, TimeUnit.SECONDS) // Timeout and unit
                         .setActivity(this)                 // Activity (for callback binding)
                         .setCallbacks(mCallBack)           // OnVerificationStateChangedCallbacks
                         .build();
@@ -220,6 +272,7 @@ public class VerifyOtpActivity extends AppCompatActivity {
                     VerifyOtpActivity.this.prefManager.setString(Constant.PRIMARY_CATEGORY, Config.ZERO);
                     VerifyOtpActivity.this.prefManager.setString(Constant.LOGIN_TYPE, Constant.NORMAL);
                     VerifyOtpActivity.this.gotoMainActivity();
+
                     return;
                 }
                 throw new AssertionError();

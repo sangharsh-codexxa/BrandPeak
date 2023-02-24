@@ -25,7 +25,7 @@ public class MyApplication extends Application {
     PrefManager prefManager;
     public static Context context;
 
-    private static final String ONESIGNAL_APP_ID = "83ea55d2-4e6d-42ef-8647-e1cb32107ece";
+    private static final String ONESIGNAL_APP_ID = "";
 
     public static AppOpenManager appOpenAdManager;
     public static MyApplication myApplication;

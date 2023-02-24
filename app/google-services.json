@@ -7,6 +7,43 @@
   "client": [
     {
       "client_info": {
+        "mobilesdk_app_id": "1:142270506550:android:4be4440ca72a104c831a97",
+        "android_client_info": {
+          "package_name": "com.editkaro.app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "142270506550-o1t6l4o360og9i0v5lfua67ioqh1kgtb.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.editkaro.app",
+            "certificate_hash": "e8e84f0168e0c6fbbcdd3fe0c4ecaf28802ae32b"
+          }
+        },
+        {
+          "client_id": "142270506550-c18pgkaij3n26l0i08af7ho0d19mkag1.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDA76tkEf00yBOL2COKTiKmTrGGiLWmzVc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "142270506550-c18pgkaij3n26l0i08af7ho0d19mkag1.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
         "mobilesdk_app_id": "1:142270506550:android:eab645d4f93ddc5d831a97",
         "android_client_info": {
           "package_name": "com.example.ready"
@@ -19,6 +56,14 @@
           "android_info": {
             "package_name": "com.example.ready",
             "certificate_hash": "cb817731fe2031322c8cb7a953060ff04d4f19ec"
+          }
+        },
+        {
+          "client_id": "142270506550-k5jq5qkvd3gg2kcj1825njg3ne2n43ah.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.ready",
+            "certificate_hash": "e8e84f0168e0c6fbbcdd3fe0c4ecaf28802ae32b"
           }
         },
         {

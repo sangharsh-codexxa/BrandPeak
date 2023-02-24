@@ -54,14 +54,9 @@ public class PersonalFrameAdapter extends RecyclerView.Adapter<PersonalFrameAdap
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                
+                listener.onClick(position);
             }
         });
-    }
-
-    /* renamed from: lambda$onBindViewHolder$0$com-readymadedata-app-adapters-PersonalFrameAdapter */
-    public /* synthetic */ void mo299x6bf975da(int position, View v) {
-        this.listener.onClick(Integer.valueOf(position));
     }
 
     public void setSelected(int pos) {

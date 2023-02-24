@@ -76,6 +76,7 @@ public class MainActivity extends AppCompatActivity {
     UserItem userItem = null;
     PostViewModel postViewModel;
     public boolean isVideo = false;
+    DialogMsg dialogMsg;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -86,6 +87,7 @@ public class MainActivity extends AppCompatActivity {
         prefManager = new PrefManager(this);
 
         userViewModel = new ViewModelProvider(this).get(UserViewModel.class);
+        dialogMsg = new DialogMsg(this, false);
 
         if (prefManager.getBoolean(Constant.IS_LOGIN)) {
             changeData();
@@ -330,13 +332,28 @@ public class MainActivity extends AppCompatActivity {
                                                    }
                                                }
         );
+        userViewModel.getDbUserData(prefManager.getString(Constant.USER_ID)).observe(MainActivity.this, result -> {
+            if (result != null) {
+                userItem = result.user;
+            }
+        });
 
         binding.bottomNavigationView.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 switch (item.getItemId()) {
                     case R.id.home_buy_plans:
-                        startActivity(new Intent(MainActivity.this, SubsPlanActivity.class));
+
+
+                            if (userItem.isSubscribed) {
+                                showWarningDialogue();
+
+                            } else {
+                                startActivity(new Intent(MainActivity.this, SubsPlanActivity.class));
+                            }
+
+
+
 
                         return true;
                     case R.id.home_menu:
@@ -531,5 +548,13 @@ public class MainActivity extends AppCompatActivity {
             }
         }
 
+    }
+    private void showWarningDialogue() {
+        dialogMsg.showConfirmDialog("Already Subscribed!", "Are you want to upgrade your plan?", "Upgrade Now", getString(R.string.cancel));
+        dialogMsg.show();
+        dialogMsg.okBtn.setOnClickListener(v -> {
+            dialogMsg.cancel();
+            startActivity(new Intent(this,SubsPlanActivity.class));
+        });
     }
 }

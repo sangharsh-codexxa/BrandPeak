@@ -18,9 +18,10 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:background="@drawable/subscription_rounded"
-    android:backgroundTint="#DCAA78"
+    android:backgroundTint="#EABC8F"
     android:layout_margin="10dp"
     android:layout_height="wrap_content">
+
 <LinearLayout
     android:gravity="center"
     android:layout_width="match_parent"

@@ -20,6 +20,7 @@ import com.readymadedata.app.R;
 import com.readymadedata.app.binding.GlideBinding;
 import com.readymadedata.app.items.UserItem;
 import com.readymadedata.app.ui.activities.AddBusinessActivity;
+import com.readymadedata.app.ui.activities.PrivacyActivity;
 import com.readymadedata.app.ui.activities.SplashyActivity;
 import com.readymadedata.app.ui.activities.SubsPlanActivity;
 import com.readymadedata.app.ui.dialog.DialogMsg;
@@ -43,7 +44,7 @@ public class ProfileFragment extends Fragment {
     MaterialTextView btnPrivacyPolicy;
     MaterialTextView btnRateUs;
     MaterialTextView btnShareUs;
-    MaterialTextView btnTermsConditions;
+    MaterialTextView btnTermsConditions,btnRefundPolicy;
     MaterialButton btnUpgrade;
     EditText edFirstName;
     ImageView ivProfileView;
@@ -67,6 +68,7 @@ public class ProfileFragment extends Fragment {
 
         prefManager = new PrefManager(getContext());
         btnMyPost = f1v.findViewById(R.id.btn_myPost);
+        btnRefundPolicy = f1v.findViewById(R.id.btn_refundPolicy);
         ivProfileView = f1v.findViewById(R.id.user_profile);
         btnMyPlan = (MaterialTextView) f1v.findViewById(R.id.btn_myPlan);
         btnShareUs = (MaterialTextView) f1v.findViewById(R.id.btn_shareApp);
@@ -100,7 +102,7 @@ public class ProfileFragment extends Fragment {
 //        btnMyPlan.setOnClickListener(e-> {
 
         btnMyPlan.setOnClickListener(e-> {
-                setupFragment(new PlanInfoFragment());
+            setupFragment(new PlanInfoFragment());
         });
 
         try {
@@ -165,6 +167,15 @@ public class ProfileFragment extends Fragment {
             }
         });
 
+        btnRefundPolicy.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(ProfileFragment.this.getActivity(), PrivacyActivity.class);
+                intent.putExtra("type", Constant.REFUND_POLICY);
+                ProfileFragment.this.startActivity(intent);
+            }
+        });
+
         btnUpgrade.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -186,16 +197,16 @@ public class ProfileFragment extends Fragment {
         });
         btnTermsConditions.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-//                Intent intent = new Intent(ProfileFragment.this.getActivity(), PrivacyActivity.class);
-//                intent.putExtra("type", Constant.PRIVACY_POLICY);
-//                ProfileFragment.this.startActivity(intent);
+                Intent intent = new Intent(ProfileFragment.this.getActivity(), PrivacyActivity.class);
+                intent.putExtra("type", Constant.TERM_CONDITION);
+                ProfileFragment.this.startActivity(intent);
             }
         });
         btnPrivacyPolicy.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-//                Intent intent = new Intent(ProfileFragment.this.getActivity(), PrivacyActivity.class);
-//                intent.putExtra("type", Constant.PRIVACY_POLICY);
-//                ProfileFragment.this.startActivity(intent);
+                Intent intent = new Intent(ProfileFragment.this.getActivity(), PrivacyActivity.class);
+                intent.putExtra("type", Constant.PRIVACY_POLICY);
+                ProfileFragment.this.startActivity(intent);
             }
         });
         btnMyPost.setOnClickListener(new View.OnClickListener() {
@@ -210,6 +221,7 @@ public class ProfileFragment extends Fragment {
                 prefManager.setString("password", "");
                 prefManager.setString(Constant.USER_ID, "");
                 startActivity(new Intent(v.getContext(), SplashyActivity.class));
+                getActivity().finish();
             }
         });
         return f1v;

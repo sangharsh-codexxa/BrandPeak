@@ -51,8 +51,6 @@ import com.readymadedata.app.viewmodel.UserViewModel;
 
 public class SplashyActivity extends AppCompatActivity {
     DialogMsg dialogMsg;
-
-    /* renamed from: id */
     String id = "";
     String imgUrl = "";
     String name = "";
@@ -133,13 +131,13 @@ public class SplashyActivity extends AppCompatActivity {
                     Util.showLog("API_KEY: " + mFirebaseRemoteConfig.getString("apiKey"));
                     SplashyActivity.this.prefManager.setString(Constant.api_key, mFirebaseRemoteConfig.getString("apiKey"));
                     Config.API_KEY = "sdghhgh416546dd5654wst56w4646w46";
-                    SplashyActivity.this.prefManager.setString("FIRST", "TRUE");
-                    SplashyActivity.this.userViewModel.setAppInfo("new");
+                    prefManager.setString("FIRST", "TRUE");
+                    userViewModel.setAppInfo("new");
                 }
             }).addOnFailureListener(new OnFailureListener() {
                 public void onFailure(Exception e) {
                     Util.showErrorLog("Firebase", (Object) e);
-                    SplashyActivity.this.gotoMainActivity();
+                    gotoMainActivity();
                 }
             });
             startActivity(new Intent(SplashyActivity.this,MainActivity.class));
@@ -257,11 +255,6 @@ public class SplashyActivity extends AppCompatActivity {
 
 
 
-    /* renamed from: lambda$initData$0$com-readymadedata-app-ui-activities-SplashyActivity */
-    public /* synthetic */ void mo853x41618596(View v) {
-        this.dialogMsg.cancel();
-        getData();
-    }
 
 
     private void initializeAds() {

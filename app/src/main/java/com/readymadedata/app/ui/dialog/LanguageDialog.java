@@ -102,7 +102,6 @@ public class LanguageDialog extends BottomSheetDialog {
 //        languageViewModel.UpdateLanguage(data.id, data.isChecked ? false : true);
         listener.onClick(selectedLanguage());
         activity.recreate();
-        Toast.makeText(activity, "Enjoy "+data.title+" Posts", Toast.LENGTH_SHORT).show();
         dismiss();
     }
 

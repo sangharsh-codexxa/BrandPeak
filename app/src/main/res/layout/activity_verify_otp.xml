@@ -8,6 +8,7 @@
     tools:context=".ui.activities.VerifyOtpActivity">
 
     <ImageView
+        android:id="@+id/imageView22"
         android:layout_width="0dp"
         android:layout_height="141dp"
         android:layout_marginStart="32dp"
@@ -34,7 +35,7 @@
         android:layout_marginEnd="16dp"
         android:layout_marginBottom="32dp"
         android:gravity="center"
-        android:text="Enter the OTP"
+        android:text="Enter OTP"
         android:textStyle="bold"
         android:textColor="@color/textColor"
         android:textSize="32sp"
@@ -77,27 +78,36 @@
         app:layout_constraintTop_toBottomOf="@+id/pinView" />
 
     <TextView
-        android:id="@+id/tvResend"
+        android:id="@+id/tvResendOtpBtn"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="16dp"
         android:gravity="center"
+        android:textColor="@color/black"
+        android:textSize="18sp"
+        android:textStyle="bold"
         android:text="@string/resend_otp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/buttonVerify" />
 
     <TextView
+        android:id="@+id/tv_otp_time"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginEnd="16dp"
         android:gravity="center"
+        android:textSize="16sp"
+        android:textColor="@color/black"
         android:text="00:00"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvResend" />
+        app:layout_constraintTop_toBottomOf="@+id/tvResendOtpBtn"
+        app:layout_constraintVertical_bias="0.036" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

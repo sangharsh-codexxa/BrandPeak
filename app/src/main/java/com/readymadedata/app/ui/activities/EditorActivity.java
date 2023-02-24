@@ -75,6 +75,7 @@ import com.karumi.dexter.listener.PermissionRequest;
 import com.karumi.dexter.listener.PermissionRequestErrorListener;
 import com.karumi.dexter.listener.multi.MultiplePermissionsListener;
 import com.readymadedata.app.Ads.InterstitialAdManager;
+import com.readymadedata.app.BuildConfig;
 import com.readymadedata.app.Config;
 import com.readymadedata.app.MyApplication;
 import com.readymadedata.app.R;
@@ -91,9 +92,12 @@ import com.readymadedata.app.databinding.ActivityEditorBinding;
 import com.readymadedata.app.databinding.BusinessFrame2Binding;
 import com.readymadedata.app.databinding.BusinessFrame3Binding;
 import com.readymadedata.app.databinding.Frame1Binding;
+import com.readymadedata.app.databinding.Frame2Binding;
+import com.readymadedata.app.databinding.Frame3Binding;
 import com.readymadedata.app.databinding.Frame6Binding;
 import com.readymadedata.app.databinding.PersonalFrame1Binding;
 import com.readymadedata.app.databinding.PersonalFrame2Binding;
+import com.readymadedata.app.databinding.PoliticalFrame1Binding;
 import com.readymadedata.app.databinding.PoliticalFrame2Binding;
 import com.readymadedata.app.items.AddTextItem;
 import com.readymadedata.app.items.BusinessItem;
@@ -332,7 +336,7 @@ public class EditorActivity extends AppCompatActivity implements InterstitialAdM
         this.binding = inflate;
         setContentView(inflate.getRoot());
         imgUrl = getIntent().getStringExtra("img_url");
-        // Adding this line will prevent taking screenshot in your app
+        //Adding this line will prevent taking screenshot in your app
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_SECURE,
                 WindowManager.LayoutParams.FLAG_SECURE);
 
@@ -515,50 +519,13 @@ public class EditorActivity extends AppCompatActivity implements InterstitialAdM
                             setFrameData(frameItemList.get(position));
                         }, 3, getResources().getDimension(com.intuit.ssp.R.dimen._2ssp));
                         frameAdapter.setSelected(0);
-                        binding.ibNextFrameApply.setOnClickListener(new View.OnClickListener() {
-                            @Override
-                            public void onClick(View v) {
-
-                                currentPosition++;
-                                if (currentPosition > frameItemList.size()) {
-
-                                    Log.e("CurrentPosition----->", String.valueOf(currentPosition));
-//                    for (int i = 0; i <= frameItemList.size(); i++) {
-
-                                    try {
-                                        setFrameData(frameItemList.get(currentPosition));
-                                        frameAdapter.setSelected(currentPosition);
-                                    } catch (IndexOutOfBoundsException e) {
-//                            binding.ibNextFrameApply.setClickable(false);
-//                            binding.ibNextFrameApply.setAlpha( 0.5f);
-                                        Toast.makeText(EditorActivity.this, "Last Frame" + String.valueOf(currentPosition), Toast.LENGTH_SHORT).show();
-                                        currentPosition = frameItemList.size();
-                                        e.printStackTrace();
-                                    }
-                                }
-                            }
-
-
-                        });
-                        binding.ibPrevFrameApply.setOnClickListener(new View.OnClickListener() {
-                            @Override
-                            public void onClick(View v) {
-                                currentPosition--;
-                                try {
-                                    setFrameData(frameItemList.get(currentPosition));
-                                    frameAdapter.setSelected(currentPosition);
-                                } catch (IndexOutOfBoundsException e) {
-                                    e.printStackTrace();
-                                    currentPosition = 0;
-                                    Toast.makeText(EditorActivity.this, "Last Frame" + String.valueOf(currentPosition), Toast.LENGTH_SHORT).show();
-                                }
-                            }
-                        });
-
                         binding.rvFrame.setAdapter(frameAdapter);
                         frameItemList.clear();
 
-                        frameItemList.add(new FrameItem(false, "", Frame6Binding.inflate(getLayoutInflater()).getRoot(), R.drawable.business_frame_preview, false));
+                        frameItemList.add(new FrameItem(false, "", Frame6Binding.inflate(getLayoutInflater()).getRoot(), R.drawable.business_d_pre, false));
+                        frameItemList.add(new FrameItem(false, "", Frame1Binding.inflate(getLayoutInflater()).getRoot(), R.drawable.business_a_pre, false));
+                        frameItemList.add(new FrameItem(false, "", Frame2Binding.inflate(getLayoutInflater()).getRoot(), R.drawable.business_b_pre, false));
+                        frameItemList.add(new FrameItem(false, "", Frame3Binding.inflate(getLayoutInflater()).getRoot(), R.drawable.business_c_pre, false));
 
                         for (int i = 0; i < result.data.size(); i++) {
                             frameItemList.add(new FrameItem(true, result.data.get(i).imageUrl, null, R.drawable.frame_preview_8, false));
@@ -568,49 +535,130 @@ public class EditorActivity extends AppCompatActivity implements InterstitialAdM
 
 
                     }
-                }
-            }
-        });
-
-        if (type.equals("personal")) {
-
-            personalFrameAdapter = new PersonalFrameAdapter(this, position -> {
-                personalFrameAdapter.setSelected(position);
-                currentPosition = position;
-                setFrameData(personalFrameList.get(position));
-            }, 3, 2);
-            personalFrameAdapter.setSelected(0);
-            binding.rvFrame.setAdapter(personalFrameAdapter);
 
 
-            userViewModel.getFrameData(prefManager.getString(Constant.USER_ID)).observe(this, result -> {
-                if (result != null) {
-                    if (result.data != null) {
+                    if (type.equals("personal")) {
+                        personalFrameAdapter = new PersonalFrameAdapter(this, position -> {
+                            personalFrameAdapter.setSelected(position);
+                            currentPosition = position;
+                            setFrameData(personalFrameList.get(position));
+                        }, 3, 2);
+                        personalFrameAdapter.setSelected(0);
+                        binding.rvFrame.setAdapter(personalFrameAdapter);
+
+
                         personalFrameList.clear();
-
 
                         Log.e("ResultFrames====>", String.valueOf(result.data.size()));
 
                         personalFrameList.add(new FrameItem(false, "", PersonalFrame1Binding.inflate(getLayoutInflater()).getRoot(), R.drawable.personal_frame_preview, false));
-//                        personalFrameList.add(new FrameItem(false, "", PersonalFrame2Binding.inflate(getLayoutInflater()).getRoot(), R.drawable.personal_frame, false));
+                        personalFrameList.add(new FrameItem(false, "", PersonalFrame2Binding.inflate(getLayoutInflater()).getRoot(), R.drawable.personal_frame, false));
 
-                        //        personalFrameList.add(new FrameItem(false, "", Frame2Binding.inflate(getLayoutInflater()).getRoot(), R.drawable.frame_preview_2, false));
-//                                personalFrameList.add(new FrameItem(false, "", Frame3Binding.inflate(getLayoutInflater()).getRoot(), R.drawable.frame_preview_3, false));
-//                                frameItemList.add(new FrameItem(false, "", Frame4Binding.inflate(getLayoutInflater()).getRoot(), R.drawable.frame_preview_4, false));
-//                                frameItemList.add(new FrameItem(false, "", Frame5Binding.inflate(getLayoutInflater()).getRoot(), R.drawable.frame_preview_5, true));
-//                                frameItemList.add(new FrameItem(false, "", Frame6Binding.inflate(getLayoutInflater()).getRoot(), R.drawable.frame_preview_6, true));
-//                                frameItemList.add(new FrameItem(false, "", Frame7Binding.inflate(getLayoutInflater()).getRoot(), R.drawable.frame_preview_7, true));
-//                                frameItemList.add(new FrameItem(false, "", Frame8Binding.inflate(getLayoutInflater()).getRoot(), R.drawable.frame_preview_8, true));
                         for (int i = 0; i < result.data.size(); i++) {
                             personalFrameList.add(new FrameItem(true, result.data.get(i).imageUrl, null, 0, true));
                         }
                         personalFrameAdapter.setFrameItemList(personalFrameList);
                         setFrameData(personalFrameList.get(0));
-                    }
-                }
-            });
-        }
 
+                    }
+
+                    if (type.equals("personal")) {
+                        personalFrameAdapter = new PersonalFrameAdapter(this, position -> {
+                            personalFrameAdapter.setSelected(position);
+                            currentPosition = position;
+                            setFrameData(personalFrameList.get(position));
+                        }, 3, 2);
+                        personalFrameAdapter.setSelected(0);
+                        binding.rvFrame.setAdapter(personalFrameAdapter);
+
+
+                        personalFrameList.clear();
+
+                        Log.e("ResultFrames====>", String.valueOf(result.data.size()));
+
+                        personalFrameList.add(new FrameItem(false, "", PersonalFrame1Binding.inflate(getLayoutInflater()).getRoot(), R.drawable.personal_frame_preview, false));
+                        personalFrameList.add(new FrameItem(false, "", PersonalFrame2Binding.inflate(getLayoutInflater()).getRoot(), R.drawable.personal_frame, false));
+
+                        for (int i = 0; i < result.data.size(); i++) {
+                            personalFrameList.add(new FrameItem(true, result.data.get(i).imageUrl, null, 0, true));
+                        }
+                        personalFrameAdapter.setFrameItemList(personalFrameList);
+                        setFrameData(personalFrameList.get(0));
+
+                    }
+
+
+                }
+            }
+        });
+
+        userViewModel.getFrameData(prefManager.getString(Constant.USER_ID)).observe(this, result -> {
+            if (result != null) {
+                if (result.data != null) {
+
+
+                    if (type.equals("personal")) {
+
+                        personalFrameAdapter = new PersonalFrameAdapter(this, position -> {
+                            personalFrameAdapter.setSelected(position);
+                            currentPosition = position;
+                            setFrameData(personalFrameList.get(position));
+                        }, 3, 2);
+                        personalFrameAdapter.setSelected(0);
+                        binding.rvFrame.setAdapter(personalFrameAdapter);
+
+
+                        personalFrameList.clear();
+
+                        Log.e("ResultFrames====>", String.valueOf(result.data.size()));
+
+                        personalFrameList.add(new FrameItem(false, "", PersonalFrame1Binding.inflate(getLayoutInflater()).getRoot(), R.drawable.personal_frame_preview, false));
+                        personalFrameList.add(new FrameItem(false, "", PersonalFrame2Binding.inflate(getLayoutInflater()).getRoot(), R.drawable.personal_frame, false));
+
+                        for (int i = 0; i < result.data.size(); i++) {
+                            personalFrameList.add(new FrameItem(true, result.data.get(i).imageUrl, null, 0, true));
+                        }
+                        personalFrameAdapter.setFrameItemList(personalFrameList);
+                        setFrameData(personalFrameList.get(0));
+
+                    }
+
+
+                }
+            }
+        });
+
+//        if (type.equals("personal")) {
+//
+//            personalFrameAdapter = new PersonalFrameAdapter(this, position -> {
+//                personalFrameAdapter.setSelected(position);
+//                currentPosition = position;
+//                setFrameData(personalFrameList.get(position));
+//            }, 3, 2);
+//            personalFrameAdapter.setSelected(0);
+//            binding.rvFrame.setAdapter(personalFrameAdapter);
+//
+//
+//            userViewModel.getFrameData(prefManager.getString(Constant.USER_ID)).observe(this, result -> {
+//                if (result != null) {
+//                    if (result.data != null) {
+//                        personalFrameList.clear();
+//
+//
+//                        Log.e("ResultFrames====>", String.valueOf(result.data.size()));
+//
+//                        personalFrameList.add(new FrameItem(false, "", PersonalFrame1Binding.inflate(getLayoutInflater()).getRoot(), R.drawable.personal_frame_preview, false));
+//                        personalFrameList.add(new FrameItem(false, "", PersonalFrame2Binding.inflate(getLayoutInflater()).getRoot(), R.drawable.personal_frame, false));
+//
+//                        for (int i = 0; i < result.data.size(); i++) {
+//                            personalFrameList.add(new FrameItem(true, result.data.get(i).imageUrl, null, 0, true));
+//                        }
+//                        personalFrameAdapter.setFrameItemList(personalFrameList);
+//                        setFrameData(personalFrameList.get(0));
+//                    }
+//                }
+//            });
+//
         if (type.equals("political")) {
             politicalFrameAdapter = new PoliticalFrameAdapter(this, position -> {
                 politicalFrameAdapter.setSelected(position);
@@ -621,7 +669,7 @@ public class EditorActivity extends AppCompatActivity implements InterstitialAdM
                 if (result != null) {
                     if (result.data != null) {
                         politicalFrameList.clear();
-//                        politicalFrameList.add(new FrameItem(false, "", PoliticalFrame1Binding.inflate(getLayoutInflater()).getRoot(), R.drawable.frame_preview_1, false));
+                        politicalFrameList.add(new FrameItem(false, "", PoliticalFrame1Binding.inflate(getLayoutInflater()).getRoot(), R.drawable.politic_preview_1, false));
                         politicalFrameList.add(new FrameItem(false, "", PoliticalFrame2Binding.inflate(getLayoutInflater()).getRoot(), R.drawable.political_frame_preview, false));
 //                                frameItemList.add(new FrameItem(false, "", Frame3Binding.inflate(getLayoutInflater()).getRoot(), R.drawable.frame_preview_3, false));
 //                                frameItemList.add(new FrameItem(false, "", Frame4Binding.inflate(getLayoutInflater()).getRoot(), R.drawable.frame_preview_4, false));
@@ -648,7 +696,6 @@ public class EditorActivity extends AppCompatActivity implements InterstitialAdM
             this.binding.flFrame.removeAllViews();
             return;
         }
-
         binding.ivFrame.setVisibility(View.GONE);
         binding.ivFrame.setVisibility(View.GONE);
         binding.flFrame.setVisibility(View.VISIBLE);
@@ -685,8 +732,6 @@ public class EditorActivity extends AppCompatActivity implements InterstitialAdM
 
 
         //Personal Open Close Controller
-
-
         tv_personal_address = frameView.findViewById(R.id.tv_address_personal);
         tv_personal_name = frameView.findViewById(R.id.tv_name_personal);
         tv_insta_personal = frameView.findViewById(R.id.tv_instausername_pers);
@@ -701,7 +746,6 @@ public class EditorActivity extends AppCompatActivity implements InterstitialAdM
         tv_insta_poli = frameView.findViewById(R.id.tv_instausername_poli);
         tv_face_poli = frameView.findViewById(R.id.tv_facebookusername_poli);
         tv_designation_poli = frameView.findViewById(R.id.tv_designation_poli);
-
         iv_PoliProfile = frameView.findViewById(R.id.iv_poli_profile);
         iv_PhotoA = frameView.findViewById(R.id.iv_photo_a);
         iv_PhotoB = frameView.findViewById(R.id.iv_photo_b);
@@ -1304,7 +1348,7 @@ public class EditorActivity extends AppCompatActivity implements InterstitialAdM
 
                         if (type.equals("business")) {
                             if (!isTextSelected() && iv_close_name.getVisibility() == View.GONE && iv_close_website.getVisibility() == View.GONE && iv_close_email.getVisibility() == View.GONE &&
-                                    iv_close_address.getVisibility() == View.GONE && iv_close_phone.getVisibility() == View.GONE) {
+                                    iv_close_address.getVisibility() == View.GONE && iv_close_phone.getVisibility() == View.GONE && iv_designation_close.getVisibility() == View.GONE) {
                                 tv_address.setTextColor(color);
                                 tv_email.setTextColor(color);
                                 tv_phone.setTextColor(color);
@@ -1385,7 +1429,6 @@ public class EditorActivity extends AppCompatActivity implements InterstitialAdM
 
 
                         if (type.equals("political")) {
-                            Toast.makeText(EditorActivity.this, "Political", Toast.LENGTH_SHORT).show();
                             if (!isTextSelected() && iv_close_name.getVisibility() == View.GONE && iv_insta_close.getVisibility() == View.GONE && iv_fb_close.getVisibility() == View.GONE && iv_close_phone.getVisibility() == View.GONE && iv_designation_close.getVisibility() == GONE) {
                                 tv_designation_poli.setTextColor(color);
                                 tv_face_poli.setTextColor(color);
@@ -2550,55 +2593,54 @@ public class EditorActivity extends AppCompatActivity implements InterstitialAdM
 
         GlideBinding.setTextSize(textView, "font_title_size");
         GlideBinding.setTextSize(fitEditText, "font_body_size");
-
         btnCamera.setOnClickListener(v -> {
             dialog.dismiss();
-            Dexter.withContext(this).withPermissions(PERMISSIONS).withListener(new MultiplePermissionsListener() {
-                public void onPermissionsChecked(MultiplePermissionsReport multiplePermissionsReport) {
-                    if (multiplePermissionsReport.areAllPermissionsGranted()) {
-                        onCameraButtonClick();
-                    }
-                    if (multiplePermissionsReport.isAnyPermissionPermanentlyDenied()) {
-                        showSettingsDialog();
-                    }
-                }
-
-                public void onPermissionRationaleShouldBeShown(List<PermissionRequest> list, PermissionToken permissionToken) {
-                    permissionToken.continuePermissionRequest();
-                }
-            }).withErrorListener(new PermissionRequestErrorListener() {
-                public void onError(DexterError dexterError) {
-                    Toast.makeText(EditorActivity.this, "Error occurred! ", Toast.LENGTH_SHORT).show();
-                }
-            }).onSameThread().check();
+//            Dexter.withContext(this).withPermissions(PERMISSIONS).withListener(new MultiplePermissionsListener() {
+//                public void onPermissionsChecked(MultiplePermissionsReport multiplePermissionsReport) {
+//                    if (multiplePermissionsReport.areAllPermissionsGranted()) {
+            onCameraButtonClick();
+//                    }
+//                    if (multiplePermissionsReport.isAnyPermissionPermanentlyDenied()) {
+//                        showSettingsDialog();
+//                    }
+//                }
+//
+//                public void onPermissionRationaleShouldBeShown(List<PermissionRequest> list, PermissionToken permissionToken) {
+//                    permissionToken.continuePermissionRequest();
+//                }
+//            }).withErrorListener(new PermissionRequestErrorListener() {
+//                public void onError(DexterError dexterError) {
+//                    Toast.makeText(EditorActivity.this, "Error occurred! ", Toast.LENGTH_SHORT).show();
+//                }
+//            }).onSameThread().check();
         });
 
         btnGallery.setOnClickListener(v -> {
             dialog.dismiss();
-            Dexter.withContext(this).withPermissions(PERMISSIONS).withListener(new MultiplePermissionsListener() {
-                public void onPermissionsChecked(MultiplePermissionsReport multiplePermissionsReport) {
-                    if (multiplePermissionsReport.areAllPermissionsGranted()) {
-                        onGalleryButtonClick();
-                    }
-                    if (multiplePermissionsReport.isAnyPermissionPermanentlyDenied()) {
-                        showSettingsDialog();
-                    }
-                }
-
-                public void onPermissionRationaleShouldBeShown(List<PermissionRequest> list, PermissionToken permissionToken) {
-                    permissionToken.continuePermissionRequest();
-                }
-            }).withErrorListener(new PermissionRequestErrorListener() {
-                public void onError(DexterError dexterError) {
-                    Toast.makeText(EditorActivity.this, "Error occurred! ", Toast.LENGTH_SHORT).show();
-                }
-            }).onSameThread().check();
+//            Dexter.withContext(this).withPermissions(PERMISSIONS).withListener(new MultiplePermissionsListener() {
+//                public void onPermissionsChecked(MultiplePermissionsReport multiplePermissionsReport) {
+//                    if (multiplePermissionsReport.areAllPermissionsGranted()) {
+            onGalleryButtonClick();
+//                    }
+//                    if (multiplePermissionsReport.isAnyPermissionPermanentlyDenied()) {
+//                        showSettingsDialog();
+//                    }
+//                }
+//
+//                public void onPermissionRationaleShouldBeShown(List<PermissionRequest> list, PermissionToken permissionToken) {
+//                    permissionToken.continuePermissionRequest();
+//                }
+//            }).withErrorListener(new PermissionRequestErrorListener() {
+//                public void onError(DexterError dexterError) {
+//                    Toast.makeText(EditorActivity.this, "Error occurred! ", Toast.LENGTH_SHORT).show();
+//                }
+//            }).onSameThread().check();
         });
 
         btnCancel.setOnClickListener(v -> {
             dialog.dismiss();
         });
-
+//
         dialog.show();
 
     }
@@ -2643,7 +2685,8 @@ public class EditorActivity extends AppCompatActivity implements InterstitialAdM
     }
 
     public void onCameraButtonClick() {
-        this.uri = FileProvider.getUriForFile(getApplicationContext(), "com.readymadedata.app.provider", createCameraFile());
+        uri = FileProvider.getUriForFile(Objects.requireNonNull(getApplicationContext()),
+                BuildConfig.APPLICATION_ID + ".provider", createCameraFile());
         Intent intent = new Intent("android.media.action.IMAGE_CAPTURE");
         intent.putExtra("output", this.uri);
         startActivityForResult(intent, SELECT_PICTURE_CAMERA);
@@ -2888,7 +2931,7 @@ public class EditorActivity extends AppCompatActivity implements InterstitialAdM
 
 
                 if (type.equals("political")) {
-                    if (!isTextSelected() && iv_close_name.getVisibility() == View.GONE && iv_designation_close.getVisibility() == View.GONE) {
+                    if (!isTextSelected() && iv_close_name.getVisibility() == View.GONE && iv_designation_close.getVisibility() == View.GONE && iv_insta_close.getVisibility() == GONE && iv_fb_close.getVisibility() ==  GONE && iv_close_phone.getVisibility() == GONE) {
                         tv_name_pol.setTypeface(typeface);
                         tv_mob_poli.setTypeface(typeface);
                         tv_designation_poli.setTypeface(typeface);
